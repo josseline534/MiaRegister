@@ -1,0 +1,44 @@
+<%- include('./partials/_header.ejs'); -%>
+    <title>Usuarios</title>
+</head>
+<body class="principal">
+    <div class="d-flex">
+        <%- include('./partials/_menu.ejs'); -%>
+        <div class="w-100">
+            <div class="container mb-5 ">
+                <a href="/register" class="btn btn-info mt-5"><i class="fas fa-user-plus"></i>  Nuevo Usuario</a>
+                <table class="table table-bordered table-striped mt-5">
+                    <thead class="tablePrimary">
+                        <tr>
+                            <th>Num.</th>
+                            <th>Usuario</th>
+                            <th>Cedula</th>
+                            <th>Rol</th>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Operación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for (var i=0; i < usuarios.length ; i++) {%>
+                            <tr>
+                                <td><%= i+1 %></td>
+                                <td><%= usuarios[i].user %></td>
+                                <td><%= usuarios[i].identify %></td>
+                                <td><%= usuarios[i].rol %></td>
+                                <td><%= usuarios[i].name %></td>
+                                <td><%= usuarios[i].lastname %></td>
+                                <% if( user.user != usuarios[i].user){ %>
+                                <td>
+                                    <a href="/delete/<%= usuarios[i]._id %>" class="btn btn-danger">Eliminar</a>
+                                    <a href="/edit/<%= usuarios[i]._id %>" class="btn btn-info">Editar</a>
+                                </td>
+                                <% } %>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<%- include('./partials/_footer.ejs'); -%>

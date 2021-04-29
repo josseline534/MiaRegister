@@ -1,0 +1,14 @@
+<div class="sidebar-container">
+    <div class="logo">
+        <h3>MiaRegister</h3>
+    </div>
+    <div class="menu">
+        <% if ( user.rol == 'admin'){ %>
+        <a href="/users" class="d-block p-3"><i class="fas fa-users mr-2 "></i>  Usuarios</a>
+        <% } %>
+        <a href="#" class="d-block p-3"><i class="fas fa-shopping-cart mr-2 "></i>  Productos</a>
+        <a href="#" class="d-block p-3"><i class="fas fa-cash-register mr-2 "></i>  Ventas</a>
+        <a href="#" class="d-block p-3"><i class="fas fa-poll mr-2 "></i>  Estadísticas</a>
+        <a href="/close" class="d-block p-3"><i class="fas fa-door-open mr-2 "></i>  Salir</a>
+    </div>
+</div>

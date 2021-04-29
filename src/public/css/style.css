@@ -1,64 +1,143 @@
-.inicio{
-    background: rgb(181,209,223);
-    background: radial-gradient(circle, rgba(181,209,223,1) 0%, rgba(160,209,233,1) 51%, rgba(86,142,153,1) 100%);
+.inicio {
+background: rgb(181, 209, 223);
+background: radial-gradient(
+    circle,
+    rgba(181, 209, 223, 1) 0%,
+    rgba(160, 209, 233, 1) 51%,
+    rgba(86, 142, 153, 1) 100%
+);
 }
-.login{
-    background: rgb(8,48,84);
-    background: linear-gradient(90deg, rgba(8,48,84,0.9640231092436975) 0%, rgba(6,22,31,1) 48%);
+.login {
+background: rgb(8, 48, 84);
+background: linear-gradient(
+    90deg,
+    rgba(8, 48, 84, 0.9640231092436975) 0%,
+    rgba(6, 22, 31, 1) 48%
+);
 }
-.modal-content{
-    background-color: #17324a;
-    opacity: .95;
-    padding: 1rem;
-    box-shadow: 0 0 3px #b9c6d2;
+.principal{
+    background: rgb(219,219,219);
+    background: linear-gradient(176deg, rgba(219,219,219,1) 0%, rgba(223,228,230,0.9640231092436975) 99%);
 }
-.imagen{
-    width: 12rem;
-    height: 12rem;
+.modal-content {
+background-color: #17324a;
+opacity: 0.95;
+padding: 1rem;
+box-shadow: 0 0 3px #b9c6d2;
 }
-.mainSection{
+.imagen {
+width: 12rem;
+height: 12rem;
+}
+.mainSection {
+margin: 0 auto;
+margin-top: 25%;
+padding: 0;
+}
+.mainSection.mainEdit{
     margin: 0 auto;
-    margin-top: 25%;
+    margin-top: 8%;
     padding: 0;
 }
-.userImg{
-    margin-top: -140px;
+.userImg {
+margin-top: -140px;
 }
-.contInit{
-    width: 28rem;
+.contInit {
+width: 28rem;
 }
-.contInit.mt-lg-5{
-    margin-top: 8rem !important;
+.contInit.mt-lg-5 {
+margin-top: 8rem !important;
 }
-.form-group input{
-    height: 42px;
-    font-size: 18px;
-    border: 0;
-    padding-left: 2.5rem;
+.form-group input, .rolGroup{
+height: 42px;
+font-size: 18px;
+border: 0;
+padding-left: 2.5rem;
+border-radius: 5px;
+}
+.form-group.formRol{
+    padding-left: 0;
+    width: 100px;
+}
+.form-group::before {
+font-family: "Font Awesome\ 5 Free";
+position: absolute;
+left: 22px;
+font-size: 22px;
+color: black;
+font-weight: 900;
+padding-top: 5px;
+}
+.form-group.userGroup::before {
+content: "\f007";
+}
+.form-group.passwordGroup::before {
+content: "\f084";
+}
+.form-group.nameGroup::before,
+.form-group.lastnameGroup::before {
+    content: "\f4ff";
+}
+.form-group.idGroup::before {
+    content: "\f2c2";
+}
+.form-group.rolUserGroup::before{
+    content: "\f2c1";
+}
+.button {
+width: 60%;
+margin: 5px 0 25px 0;
+}
+.forgot {
+padding: 5px 0;
+}
+.forgot a {
+color: blanchedalmond;
+}
+/*------------------------------*/
+.sidebar-container{
+    height: 100vh;
+    background-color: #17324a;
+    color: #c9d1d7;
+}
+.sidebar-container .logo{
+    padding: 1rem 1.25rem;
+}
+.sidebar-container .menu{
+    width: 18rem;
+}
+.sidebar-container .menu a{
+    color: #c9d1d7;
+    text-decoration: none;
+}
+.sidebar-container .menu a:hover{
+    color: #a8ddee;
+}
+.sidebar-container .menu a i{
+    font-size: 1.5rem;
+}
+/*--------------------------------*/
+.tableUser{
+    width: 100%;
+}
+.tablePrimary{
+    background-color: #17324a;
     border-radius: 5px;
+    color: #c9d1d7;
 }
-.form-group::before{
-    font-family: "Font Awesome\ 5 Free";
-    position: absolute;
-    left: 22px;
-    font-size: 22px;
-    color: black;
-    font-weight: 900;
-    padding-top: 5px;
+/*------------------------------*/
+.contSalir{
+    background-color: #17324a;
+    opacity: 0.95;
+    color: cornsilk;
 }
-.form-group.userGroup::before{
-    content: "\f007";
+.userImg.salir .imagen{
+    width: 6rem;
+    height: 6rem;
 }
-.form-group.passwordGroup::before{
-    content: "\f084";
+.userImg.salir {
+    margin-top: -70px;
 }
-.button{
-    width: 60%;
-    margin: 5px 0 25px 0;
-}
-.forgot{
-    padding: 5px 0;
-}
-.forgot a{
-    color: blanchedalmond;
+.userImg.edit {
+    margin-top: -100px;
 }
