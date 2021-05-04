@@ -3,11 +3,16 @@
 </head>
 <body class="login">
     <div class="text-center modal-dialog">
-        <div class="col-sm-8 mainSection">
+        <div class="col-sm-8 mainSection sectionLogin">
             <div class="modal-content">
                 <div class="col-12 userImg">
                     <img class="imagen" src="/img/avatar.png" alt="Avatar">
                 </div>
+                <% if (LoginMessage && LoginMessage.length > 0 ){%>
+                    <div class="alert alert-danger alert-dismissible fade show message" role="alert">
+                        <%=LoginMessage%>
+                    </div>
+                <%}%>
                 <form action="/users" method="POST" class="col-12">
                     <div class="form-group userGroup">
                         <input class="form-control" name="usuario" type="text" placeholder="Usuario" required>

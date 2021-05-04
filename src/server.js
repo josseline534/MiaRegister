@@ -25,12 +25,20 @@ app.use(bodyParser.urlencoded({extended:false})) // procesar datos
 app.use(bodyParser.json())
 app.use(session({
     secret:'sdxcfvgbhuinjokm',
-    resave:false,
-    saveUninitialized: false
+    resave:true,
+    saveUninitialized: true
 }))
 app.use(passport.initialize()) // autenticación
 app.use(passport.session()) // guarda la sesión
 app.use(flash()) // pasar sms en html
+
+// global variables
+app.use((req, res, next)=>{
+    res.locals.RegistroMessage = req.flash('RegistroMessage')
+    res.locals.LoginMessage = req.flash('LoginMessage')
+    res.locals.deleteMessage = req.flash('deleteMessage')
+    next()
+})
 
 // routes
 app.use('/', routes)

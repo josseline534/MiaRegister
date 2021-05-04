@@ -1,14 +1,14 @@
 <%- include('./partials/_header.ejs'); -%>
     <title>Editar</title>
 </head>
-<body class="principal">
+<body class="principal" onpaste="return false">
     <div class="d-flex">
         <%- include('./partials/_menu.ejs'); -%>
         <div class="w-100">
             <div class="text-center modal-dialog">
-                <div class="col-sm-8 mainSection mainEdit">
+                <div class="col-sm-8 mainSection">
                     <div class="modal-content">
-                        <div class="col-12 userImg edit">
+                        <div class="col-12 userImg">
                             <img class="imagen" src="/img/avatar.png" alt="Avatar">
                         </div>
                         <form action="/edit/<%= usuario._id %>" method="POST" class="col-12">
@@ -31,9 +31,11 @@
                             <div class="form-group idGroup">
                                 <input class="form-control"
                                 name="cedula"
-                                type="text"
+                                id="cedula"
+                                type="number"
                                 placeholder="Identificación"
                                 required
+                                onkeypress='return validaNumericos(event)'
                                 value= "<%= usuario.identify %>">
                             </div>
                             <div class="form-group userGroup">
@@ -49,8 +51,9 @@
                                 <input class="form-control"
                                 name="password"
                                 type="password"
-                                placeholder="Actulizar Contraseña"
-                                required>
+                                placeholder="Actualizar Contraseña"
+                                required
+                                value= "<%=usuario.password %>">
                             </div>
                             <div class="input-group mb-3 rolUserGroup">
                                 <select class="custom-select rolGroup" name="rol" >
@@ -64,7 +67,7 @@
                                 </select>
                             </div>
                             <button type="submit" class="button btn btn-info form-control">
-                                <i class="fas fa-sign-in-alt"></i>  Registrar
+                                <i class="fas fa-sign-in-alt"></i>  Actualizar
                             </button>
                         </form>
                         <div class="col-12 forgot">

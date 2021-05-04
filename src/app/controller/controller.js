@@ -9,38 +9,38 @@ let controller = {
     login: (req, res)=>{
         res.render('login')
     },
-    register: (req, res)=>{
-        res.render('registerUsuario', {
-            user: req.user
-        })
+    register: async(req, res)=>{
+        if(!req.user){
+            res.render('registerUsuario',{
+                user: req.user
+            })
+        }else{
+            res.render('registerUsuario', {
+                user: req.user
+            })
+        }
     },
     users:async(req, res)=>{
         if(req.isAuthenticated()){
             const usuarios = await User.find()
             res.render('users',{
                 user: req.user,
-                usuarios
+                usuarios,
+                editMessage:""
             })
         }else{
             res.redirect('/')
         }
     },
     signUp:passport.authenticate('local-registro', {
-        failuredRedirect: '/registerUsuario',
-        failuredFlash: true
+        successRedirect: '/users',
+        failureFlash:true,
+        failureRedirect:'/formregister',
     }),
-    signUpUser: async (req, res) => {
-        const usuarios = await User.find()
-        let user = await User.findById({_id: req.body.userLog})
-        res.render('users',{
-            user: user,
-            usuarios
-        })
-    },
     signIn:passport.authenticate('local-login', {
         successRedirect: '/users',
-        failuredRedirect: '/login',
-        failuredFlash: true
+        failuredFlash: true,
+        failureRedirect: '/login'
     }),
     close: (req, res) => {
         res.render('salirUsuario', {
@@ -54,6 +54,7 @@ let controller = {
     delete: async (req, res) => {
         const { id } = req.params
         await User.remove({_id: id})
+        req.flash('deleteMessage', 'Usuario eliminado correctamente')
         res.redirect('/users')
     },
     edit: async (req, res)=>{
@@ -66,11 +67,19 @@ let controller = {
     },
     update: async (req, res) => {
         const { id } = req.params
-        await User.update({_id : id}, req.body)
+        await User.update({_id : id}, {
+            name: req.body.name,
+            lastname: req.body.lastName,
+            password: new User().generateHash(req.body.password),
+            identify: req.body.cedula,
+            rol: req.body.rol,
+        })
         const usuarios = await User.find()
+        const editMessage = 'Usuario actualizado correctamente'
         res.render('users',{
             user: req.user,
-            usuarios
+            usuarios,
+            editMessage
         })
     }
 }

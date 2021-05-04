@@ -31,16 +31,14 @@ height: 12rem;
 }
 .mainSection {
 margin: 0 auto;
-margin-top: 25%;
+margin-top: 8%;
 padding: 0;
 }
-.mainSection.mainEdit{
-    margin: 0 auto;
-    margin-top: 8%;
-    padding: 0;
+.mainSection.sectionLogin{
+    margin-top: 30%;
 }
 .userImg {
-margin-top: -140px;
+margin-top: -100px;
 }
 .contInit {
 width: 28rem;
@@ -48,12 +46,27 @@ width: 28rem;
 .contInit.mt-lg-5 {
 margin-top: 8rem !important;
 }
-.form-group input, .rolGroup{
+.form-group input, .rolGroup, .message{
 height: 42px;
 font-size: 18px;
 border: 0;
 padding-left: 2.5rem;
 border-radius: 5px;
+}
+.message{
+    margin: 1rem;
+    margin-top: -8%;
+    font-size: 1rem;
+}
+#mensaje{
+    margin-top: 2rem;
+    margin-bottom: .5rem;
+    border: #155724 solid 1px;
+    padding-top: 8px;
+}
+.alert-dismissible .close {
+    top: -5px;
+    color: #155724;
 }
 .form-group.formRol{
     padding-left: 0;
@@ -140,4 +153,7 @@ color: blanchedalmond;
 }
 .userImg.edit {
     margin-top: -100px;
+}
+#cedError .alert.alert-danger.alert-dismissible.fade.show{
+    padding: 0.5px;
 }

@@ -1,7 +1,7 @@
 <%- include('./partials/_header.ejs'); -%>
     <title>Registro</title>
 </head>
-<body class="principal">
+<body class="principal" onpaste="return false">
     <div class="d-flex">
         <%- include('./partials/_menu.ejs'); -%>
         <div class="w-100">
@@ -11,22 +11,51 @@
                         <div class="col-12 userImg">
                             <img class="imagen" src="/img/avatar.png" alt="Avatar">
                         </div>
+                        <% if (RegistroMessage && RegistroMessage.length > 0 ){%>
+                            <div class="alert alert-danger alert-dismissible fade show message" role="alert">
+                                <%=RegistroMessage%>
+                            </div>
+                        <%}%>
                         <form action="/register" method="POST" class="col-12">
-                            <input type="text" name="userLog" value="<%= user._id %>">
+                            <input type="hidden" name="userLog" value="<%= user._id %>">
                             <div class="form-group nameGroup">
-                                <input class="form-control" name="name" type="text" placeholder="Nombre" required>
+                                <input class="form-control"
+                                name="name"
+                                type="text"
+                                placeholder="Nombre"
+                                required>
                             </div>
                             <div class="form-group lastnameGroup">
-                                <input class="form-control" name="lastName" type="text" placeholder="Apellido" required>
+                                <input class="form-control"
+                                name="lastName"
+                                type="text"
+                                placeholder="Apellido"
+                                required>
                             </div>
                             <div class="form-group idGroup">
-                                <input class="form-control" name="cedula" type="text" placeholder="Identificación" required>
+                                <input class="form-control"
+                                name="cedula"
+                                id="cedula"
+                                type="number"
+                                placeholder="Identificación"
+                                required
+                                onkeypress='return validaNumericos(event)'
+                                onblur="comprobarCedula()">
                             </div>
+                            <div id="cedError"></div>
                             <div class="form-group userGroup">
-                                <input class="form-control" name="usuario" type="text" placeholder="Usuario" required>
+                                <input class="form-control"
+                                name="usuario"
+                                type="text"
+                                placeholder="Usuario"
+                                required>
                             </div>
                             <div class="form-group passwordGroup">
-                                <input class="form-control" name="password" type="password" placeholder="Contraseña" required>
+                                <input class="form-control"
+                                name="password"
+                                type="password"
+                                placeholder="Contraseña"
+                                required>
                             </div>
                             <div class="input-group mb-3">
                                 <select class="custom-select rolGroup" name="rol" >

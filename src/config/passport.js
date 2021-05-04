@@ -18,11 +18,12 @@ passport.use('local-registro', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 },async(req, usuario, password, done) => {
-    await User.findOne({'user': usuario}, (error, user) => {
+    await User.findOne({'user': usuario}, async(error, user) => {
         if (error){
             return done(error)
         }
         if (user){
+            var userLog = await User.findById({_id: req.body.userLog})
             return done(null, false, req.flash('RegistroMessage', 'Usuario ya existe'))
         }else{
             let newUser = new User()
@@ -32,11 +33,12 @@ passport.use('local-registro', new LocalStrategy({
             newUser.user = usuario
             newUser.password = newUser.generateHash(password)
             newUser.rol = req.body.rol
-            newUser.save((error) => {
+            newUser.save(async(error) => {
                 if (error){
                     console.log(error);
                 }else{
-                    return done(null, newUser)
+                    var user = await User.findById({_id: req.body.userLog})
+                    return done(null, user)
                 }
             })
         }
@@ -51,7 +53,6 @@ passport.use('local-login', new LocalStrategy({
     passReqToCallback: true
 }, async(req, usuario, password, done) => {
     await User.findOne({'user': usuario}, (err, user) => {
-        console.log(user);
         if (err){
             return done(err)
         }
