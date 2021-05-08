@@ -1,6 +1,6 @@
 'use strict'
 const passport = require('../../config/passport')
-const User = require('../../app/models/user')
+const User = require('../models/user')
 
 let controller = {
     index: (req, res)=>{

@@ -30,15 +30,22 @@ width: 12rem;
 height: 12rem;
 }
 .mainSection {
-margin: 0 auto;
-margin-top: 8%;
-padding: 0;
+    margin: 0 auto;
+    margin-top: 8%;
+    padding: 0;
 }
 .mainSection.sectionLogin{
     margin-top: 30%;
 }
 .userImg {
 margin-top: -100px;
+}
+[src="/img/compras.png"],
+[src="/img/product.png"]{
+    width: 95px;
+    height: 95px;
+    margin-top:18%;
+    margin-bottom: 1rem;
 }
 .contInit {
 width: 28rem;
@@ -73,19 +80,19 @@ border-radius: 5px;
     width: 100px;
 }
 .form-group::before {
-font-family: "Font Awesome\ 5 Free";
-position: absolute;
-left: 22px;
-font-size: 22px;
-color: black;
-font-weight: 900;
-padding-top: 5px;
+    font-family: "Font Awesome\ 5 Free";
+    position: absolute;
+    left: 22px;
+    font-size: 22px;
+    color: black;
+    font-weight: 900;
+    padding-top: 5px;
 }
 .form-group.userGroup::before {
-content: "\f007";
+    content: "\f007";
 }
 .form-group.passwordGroup::before {
-content: "\f084";
+    content: "\f084";
 }
 .form-group.nameGroup::before,
 .form-group.lastnameGroup::before {
@@ -94,8 +101,29 @@ content: "\f084";
 .form-group.idGroup::before {
     content: "\f2c2";
 }
-.form-group.rolUserGroup::before{
+.form-group.rolUserGroup::before,
+.form-group.proveedorGroup::before{
     content: "\f2c1";
+}
+.form-group.codeGroup::before{
+    content: "\f11c";
+}
+.form-group.fechaGroup::before{
+    content: "\f073";
+}
+.form-group.totalGroup::before,
+.form-group.subTotalGroup::before,
+.form-group.pUnitGroup::before{
+    content: "\f155";
+}
+.form-group.ivaGroup::before{
+    content: "\f4c0";
+}
+.form-group.detailGroup::before {
+    content: "\f303";
+}
+.form-group.cantidadGroup::before {
+    content: "\f0cb";
 }
 .button {
 width: 60%;
@@ -117,7 +145,7 @@ color: blanchedalmond;
     padding: 1rem 1.25rem;
 }
 .sidebar-container .menu{
-    width: 18rem;
+    width: 14rem;
 }
 .sidebar-container .menu a{
     color: #c9d1d7;

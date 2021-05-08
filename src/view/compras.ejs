@@ -1,0 +1,39 @@
+<%- include('./partials/_header.ejs'); -%>
+    <title>Productos</title>
+</head>
+<body class="principal">
+    <div class="d-flex">
+        <%- include('./partials/_menu.ejs'); -%>
+        <div class="w-100">
+            <div class="container mb-5 ">
+                <a href="/compras/formCompra" class="btn btn-info mt-5"><i class="fas fa-plus"></i>  Nueva Compra</a>
+                <nav class="navbar justify-content-between">
+                    <a class="navbar-brand"></a>
+                    <form class="form-inline">
+                        <input class="form-control mr-sm-2"
+                        type="search"
+                        placeholder="Buscar"
+                        aria-label="Search">
+                        <button class="btn btn-info my-2 my-sm-0" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </nav>
+                <table class="table table-bordered table-striped mt-5">
+                    <thead class="tablePrimary">
+                        <tr>
+                            <th>Num.</th>
+                            <th>Código</th>
+                            <th>Proveedor</th>
+                            <th>Fecha</th>
+                            <th>Subtotal</th>
+                            <th>Ver más</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<%- include('./partials/_footer.ejs'); -%>

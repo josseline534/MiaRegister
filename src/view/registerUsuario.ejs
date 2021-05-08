@@ -16,7 +16,7 @@
                                 <%=RegistroMessage%>
                             </div>
                         <%}%>
-                        <form action="/register" method="POST" class="col-12">
+                        <form action="/user/register" method="POST" class="col-12">
                             <input type="hidden" name="userLog" value="<%= user._id %>">
                             <div class="form-group nameGroup">
                                 <input class="form-control"
@@ -63,7 +63,18 @@
                                     <option value="vendedor">Vendedor</option>
                                 </select>
                             </div>
-                            <button type="submit" class="button btn btn-info form-control"><i class="fas fa-sign-in-alt"></i>  Registrar</button>
+                            <div class="btn-toolbar">
+                                <div class="btn-group mr-5">
+                                    <a href="/users" class="button btn btn-warning form-control">
+                                        <i class="fas fa-arrow-alt-circle-left"></i>  Cancelar
+                                    </a>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="submit" class="button btn btn-info form-control">
+                                        <i class="fas fa-sign-in-alt"></i>  Registrar
+                                    </button>
+                                </div>
+                            </div >
                         </form>
                         <div class="col-12 forgot">
                         </div>

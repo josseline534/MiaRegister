@@ -1,0 +1,90 @@
+<%- include('./partials/_header.ejs'); -%>
+    <title>Productos</title>
+</head>
+<body class="principal">
+    <div class="d-flex">
+        <%- include('./partials/_menu.ejs'); -%>
+        <div class="w-100">
+            <div class="d-flex">
+            </div>
+            <div class="d-flex mt-5">
+                <div class="col-sm-4 text-center modal-dialog">
+                    <div class="mainSection">
+                        <div class="modal-content">
+                            <div class="col-12 userImg">
+                                <img class="imagen" src="/img/product.png" alt="Product">
+                            </div>
+                            <form action="/compras/addProducto/<%=newCompra._id%>" method="POST" class="col-12">
+                                <div class="form-group detailGroup">
+                                    <input class="form-control"
+                                    name="detail"
+                                    type="text"
+                                    placeholder="Detalle"
+                                    required>
+                                </div>
+                                <div class="form-group cantidadGroup">
+                                    <input class="form-control"
+                                    name="cantidad"
+                                    type="number"
+                                    placeholder="Cantidad"
+                                    required>
+                                </div>
+                                <div class="form-group pUnitGroup">
+                                    <input class="form-control"
+                                    name="pUnit"
+                                    type="text"
+                                    placeholder="Precio Unitario"
+                                    required>
+                                </div>
+                                <div class="btn-toolbar justify-content-md-center">
+                                    <div class="btn-group">
+                                        <button type="submit" class="button btn btn-info form-control">
+                                            <i class="fas fa-cart-plus"></i>  Añadir
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8 mt-5 mr-3">
+                    <% if (message && message.length > 0){%>
+                        <div class="alert alert-success alert-dismissible fade show message" role="alert">
+                            <%=message%>
+                        </div>
+                    <%}%>
+                    <table class="table table-bordered table-striped">
+                        <thead class="tablePrimary">
+                            <tr>
+                                <th>Num.</th>
+                                <th>Detalle</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                                <th>Operación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for (let i=0; i < newCompra.productos.length; i++){%>
+                                <tr>
+                                    <td><%= i+1 %></td>
+                                    <td><%= newCompra.productos[i].producto.detalle %></td>
+                                    <td><%= newCompra.productos[i].producto.cantidad %></td>
+                                    <td><%= parseFloat(newCompra.productos[i].producto.precioTotal).toFixed(2) %></td>
+                                    <td>
+                                        <a href="/" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                        <a href="/" class="btn btn-info"><i class="fas fa-pen"></i></a>
+                                    </td>
+                                </tr>
+                            <%}%>
+                        </tbody>
+                    </table>
+                    <div class="offset-9">
+                        <a href="/compras" class="button btn btn-warning">
+                            <i class="fas fa-arrow-alt-circle-left"></i>  Finalizar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<%- include('./partials/_footer.ejs'); -%>

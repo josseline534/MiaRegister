@@ -4,19 +4,31 @@ const express = require('express')
 const route = express.Router()
 
 const controller = require('../controller/controller')
+const controllerProduct = require('../controller/product')
+const controllerCompra = require('../controller/compra')
 
+//----------------------USER--------------------------
 // GET
 route.get('/', controller.index)
 route.get('/login', controller.login)
-route.get('/formregister', controller.register)
+route.get('/user/formregister', controller.register)
 route.get('/users', controller.users)
-route.get('/close', controller.close)
-route.get('/logout', controller.logout)
-route.get('/delete/:id', controller.delete)
-route.get('/edit/:id', controller.edit)
+route.get('/user/close', controller.close)
+route.get('/user/logout', controller.logout)
+route.get('/user/delete/:id', controller.delete)
+route.get('/user/edit/:id', controller.edit)
 // POST
-route.post('/register', controller.signUp)
+route.post('/user/register', controller.signUp)
 route.post('/users', controller.signIn)
-route.post('/edit/:id', controller.update)
+route.post('/user/edit/:id', controller.update)
 
+//----------------------PRODUCT--------------------------
+//POST
+route.post('/compras/addProducto/:id', controllerProduct.formProducto)
+
+//----------------------COMPRA--------------------------
+route.get('/compras', controllerCompra.compras)
+route.get('/compras/formCompra', controllerCompra.formCompra)
+//POST
+route.post('/compras/formCompra', controllerCompra.insert)
 module.exports = route

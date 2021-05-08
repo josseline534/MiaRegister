@@ -37,6 +37,7 @@ app.use((req, res, next)=>{
     res.locals.RegistroMessage = req.flash('RegistroMessage')
     res.locals.LoginMessage = req.flash('LoginMessage')
     res.locals.deleteMessage = req.flash('deleteMessage')
+    res.locals.failedCompra = req.flash('failedCompra')
     next()
 })
 

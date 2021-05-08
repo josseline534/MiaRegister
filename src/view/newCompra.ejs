@@ -1,0 +1,82 @@
+<%- include('./partials/_header.ejs'); -%>
+    <title>Productos</title>
+</head>
+<body class="principal">
+    <div class="d-flex">
+        <%- include('./partials/_menu.ejs'); -%>
+        <div class="w-100">
+            <div class="text-center modal-dialog">
+                <div class="col-sm-9 mainSection">
+                    <div class="modal-content">
+                        <div class="col-12 userImg">
+                            <img class="imagen" src="/img/compras.png" alt="Compras">
+                        </div>
+                        <% if (failedCompra && failedCompra.length > 0){%>
+                            <div class="alert alert-danger alert-dismissible fade show message" role="alert">
+                                <%=failedCompra%>
+                            </div>
+                        <%}%>
+                        <form action="/compras/formCompra" method="POST" class="col-12">
+                            <div class="form-group codeGroup">
+                                <input class="form-control"
+                                name="codigo"
+                                type="text"
+                                placeholder="Código Factura"
+                                required>
+                            </div>
+                            <div class="form-group proveedorGroup">
+                                <input class="form-control"
+                                name="proveedor"
+                                type="text"
+                                placeholder="Proveedor"
+                                required>
+                            </div>
+                            <div class="form-group fechaGroup">
+                                <input class="form-control"
+                                name="fecha"
+                                type="date"
+                                placeholder="Fecha"
+                                required>
+                            </div>
+                            <div class="form-group totalGroup">
+                                <input class="form-control"
+                                name="total"
+                                type="text"
+                                placeholder="Total"
+                                required>
+                            </div>
+                            <div class="form-group ivaGroup">
+                                <input class="form-control"
+                                name="iva"
+                                type="text"
+                                placeholder="IVA"
+                                required>
+                            </div>
+                            <div class="form-group mb-3 subTotalGroup">
+                                <input class="form-control"
+                                name="subTotal"
+                                type="text"
+                                placeholder="Subtotal"
+                                required>
+                            </div>
+                            <div class="btn-toolbar justify-content-md-center">
+                                <div class="btn-group mr-4">
+                                    <a href="/compras" class="button btn btn-warning form-control">
+                                        <i class="fas fa-arrow-alt-circle-left"></i>  Cancelar
+                                    </a>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="submit" class="button btn btn-info form-control">
+                                        <i class="fas fa-cart-plus"></i>  Añadir Productos
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="col-12 forgot">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<%- include('./partials/_footer.ejs'); -%>

@@ -6,7 +6,7 @@
         <%- include('./partials/_menu.ejs'); -%>
         <div class="w-100">
             <div class="container mb-5 ">
-                <a href="/formregister" class="btn btn-info mt-5"><i class="fas fa-user-plus"></i>  Nuevo Usuario</a>
+                <a href="/user/formregister" class="btn btn-info mt-5"><i class="fas fa-user-plus"></i>  Nuevo Usuario</a>
                 <% if (deleteMessage && deleteMessage.length > 0 ){%>
                     <div id="mensaje" class="alert alert-success alert-dismissible fade show message" role="alert">
                         <%=deleteMessage%>
@@ -46,8 +46,8 @@
                                 <td><%= usuarios[i].lastname %></td>
                                 <% if( user.user != usuarios[i].user){ %>
                                 <td>
-                                    <a href="/delete/<%= usuarios[i]._id %>" class="btn btn-danger">Eliminar</a>
-                                    <a href="/edit/<%= usuarios[i]._id %>" class="btn btn-info">Editar</a>
+                                    <a href="/user/delete/<%= usuarios[i]._id %>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="/user/edit/<%= usuarios[i]._id %>" class="btn btn-info"><i class="fas fa-pen"></i></a>
                                 </td>
                                 <% } %>
                             </tr>
