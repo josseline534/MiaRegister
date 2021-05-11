@@ -2,9 +2,8 @@
 
 let validator = require('validator')
 
-const passport = require('../../config/passport')
-const User = require('../models/user')
 const Compra = require('../models/compra')
+const Product = require('../models/producto')
 
 let controller ={
     compras: (req, res)=>{
@@ -61,6 +60,41 @@ let controller ={
                 user: req.user
             })
         }
+    },
+    delete:async(req, res)=>{
+        const idCompra = req.params.idCompra
+        const idProducto = req.params.idProducto
+        const cantidad = req.params.cant
+        //Buscar el producto
+        let prod = await Product.findById({_id: idProducto})
+        //Actualizar Stock del producto
+        await Product.updateOne({_id:idProducto},{
+            stock: parseInt(prod.stock) - parseInt(cantidad)
+        })
+        //Eliminar producto de la factura o compra
+        await Compra.updateOne({_id : idCompra},{
+            $pull:{
+                'productos':{
+                    _id:req.params.id
+                }
+            }
+        }, async(error)=>{
+            let newCompra = await Compra.findById({_id: idCompra})
+            if(error){
+                console.log(`ERROR PRODUCTO DELETE COMPRA: ${error}`);
+                res.render('newProducto', {
+                    user: req.user,
+                    newCompra,
+                    message: 'No se pudo eliminar el producto de la factura'
+                })
+            }else{
+                res.render('newProducto', {
+                    user: req.user,
+                    newCompra,
+                    message: 'Producto eliminado correctamente'
+                })
+            }
+        })
     }
 }
 

@@ -26,7 +26,6 @@ let controller = {
             }
             if(producto){
                 //Actualizar stock, precios
-                console.log(producto);
                 await Product.updateOne({_id:producto._id},{
                     detalle: req.body.detail,
                     stock: parseInt(producto.stock) + parseInt(req.body.cantidad),
@@ -43,7 +42,7 @@ let controller = {
                         })
                     }else{
                         //Actualizar Compra y añadir el producto
-                        let pTotal = req.body.cantidad * producto.precioUnit
+                        let pTotal = req.body.cantidad * pUnit
                         await Compra.updateOne({_id : id},{
                             $push:{
                                 'productos':{
@@ -79,7 +78,6 @@ let controller = {
                         })
                     }
                 })
-                console.log(producto);
             }else{
                 //Validacion Producto nuevo
                 try{
