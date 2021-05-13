@@ -1,5 +1,5 @@
 <%- include('./partials/_header.ejs'); -%>
-    <title>Productos</title>
+    <title>Editar Producto</title>
 </head>
 <body class="principal">
     <div class="d-flex">
@@ -14,12 +14,13 @@
                             <div class="col-12 userImg">
                                 <img class="imagen" src="/img/product.png" alt="Product">
                             </div>
-                            <form action="/compras/addProducto/<%=newCompra._id%>" method="POST" class="col-12">
+                            <form action="/compras/editProducto/<%=newCompra._id%>&<%=prod._id%>&<%=idObjProd%>&<%=cant%>" method="POST" class="col-12">
                                 <div class="form-group detailGroup">
                                     <input class="form-control"
                                         name="detail"
                                         type="text"
                                         placeholder="Detalle"
+                                        value="<%=prod.detalle%>"
                                         required>
                                 </div>
                                 <div class="form-group cantidadGroup">
@@ -27,6 +28,7 @@
                                     name="cantidad"
                                     type="number"
                                     placeholder="Cantidad"
+                                    value="<%=cant%>"
                                     required>
                                 </div>
                                 <div class="form-group pUnitGroup">
@@ -34,16 +36,12 @@
                                     name="pUnit"
                                     type="text"
                                     placeholder="Precio Unitario"
+                                    value="<%=prod.precioUnit%>"
                                     required>
                                 </div>
                                 <div class="btn-toolbar justify-content-md-center">
                                     <div class="btn-group">
                                         <button type="submit"
-                                        id="btnAnadir"
-                                        class="button btn btn-info form-control">
-                                            <i class="fas fa-cart-plus"></i>  Añadir
-                                        </button>
-                                        <button type="submit" style="display: none;"
                                         id="btnEditar"
                                         class="button btn btn-warning form-control">
                                             <i class="fas fa-cart-plus"></i>  Editar
@@ -60,6 +58,9 @@
                             <%=message%>
                         </div>
                     <%}%>
+                    <p >
+                        <%=prod%>
+                    </p>
                     <table class="table table-bordered table-striped">
                         <thead class="tablePrimary">
                             <tr>
@@ -83,7 +84,7 @@
                                         class="btn btn-danger">
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
-                                        <a href="/compras/editProducto/<%=newCompra._id%>&<%=newCompra.productos[i].producto.id%>&<%=newCompra.productos[i].producto.cantidad%>&<%=newCompra.productos[i]._id%>"
+                                        <a href="/compras/editProducto/<%=newCompra._id%>&<%=newCompra.productos[i].producto.id%>&<%=newCompra.productos[i]._id%>"
                                         class="btn btn-info">
                                             <i class="fas fa-pen"></i>
                                         </a>

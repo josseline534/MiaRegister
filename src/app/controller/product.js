@@ -38,7 +38,7 @@ let controller = {
                         res.render('newProducto', {
                             user: req.user,
                             newCompra,
-                            message: 'No se pudo guardar el producto'
+                            message: 'No se pudo guardar el producto',
                         })
                     }else{
                         //Actualizar Compra y añadir el producto
@@ -60,7 +60,8 @@ let controller = {
                                 res.render('newProducto', {
                                     user: req.user,
                                     newCompra,
-                                    message: 'No se pudo registrar el producto en la factura'
+                                    message: 'No se pudo registrar el producto en la factura',
+    
                                 })
                             }else{
                                 await Compra.updateOne({_id : id},{
@@ -72,7 +73,8 @@ let controller = {
                                 res.render('newProducto', {
                                     user: req.user,
                                     newCompra,
-                                    message: 'Producto registrado correctamente'
+                                    message: 'Producto registrado correctamente',
+    
                                 })
                             }
                         })
@@ -106,7 +108,8 @@ let controller = {
                             res.render('newProducto', {
                                 user: req.user,
                                 newCompra,
-                                message: 'No se pudo guardar el producto'
+                                message: 'No se pudo guardar el producto',
+
                             })
                         }else{
                             //Actualizar Compra y añadir el producto
@@ -128,7 +131,8 @@ let controller = {
                                     res.render('newProducto', {
                                         user: req.user,
                                         newCompra,
-                                        message: 'No se pudo registrar el producto en la factura'
+                                        message: 'No se pudo registrar el producto en la factura',
+        
                                     })
                                 }else{
                                     await Compra.updateOne({_id : id},{
@@ -140,7 +144,8 @@ let controller = {
                                     res.render('newProducto', {
                                         user: req.user,
                                         newCompra,
-                                        message: 'Producto registrado correctamente'
+                                        message: 'Producto registrado correctamente',
+        
                                     })
                                 }
                             })

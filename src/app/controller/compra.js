@@ -1,5 +1,6 @@
 'use strict'
 
+const e = require('express')
 let validator = require('validator')
 
 const Compra = require('../models/compra')
@@ -45,12 +46,14 @@ let controller ={
             newCompra.subtotal = req.body.subtotal
             newCompra.save((error)=>{
                 if(error){
+                    console.log(`ERROR ${error}`);
                     req.flash('failedCompra','No se guardo la compra')
                 }else{
                     res.render('newProducto', {
                         user: req.user,
                         newCompra,
-                        message: 'Compra registrada correctamente'
+                        message: 'Compra registrada correctamente',
+
                     })
                 }
             })
@@ -85,13 +88,77 @@ let controller ={
                 res.render('newProducto', {
                     user: req.user,
                     newCompra,
-                    message: 'No se pudo eliminar el producto de la factura'
+                    message: 'No se pudo eliminar el producto de la factura',
                 })
             }else{
                 res.render('newProducto', {
                     user: req.user,
                     newCompra,
-                    message: 'Producto eliminado correctamente'
+                    message: 'Producto eliminado correctamente',
+                })
+            }
+        })
+    },
+    edit: async(req, res) =>{
+        let prod = await Product.findById({_id: req.params.idProducto})
+        console.log(prod);
+        let newCompra = await Compra.findById({_id: req.params.idCompra})
+        res.render('prodEdit', {
+            user: req.user,
+            newCompra,
+            message: '',
+            prod,
+            cant: req.params.cant,
+            idObjProd: req.params.id
+        })
+    },
+    update:async(req, res) =>{
+        console.log(req.body);
+        console.log(req.params);
+        //Calculo de IVA y Precio de Venta
+        let pUnit = parseFloat((req.body.pUnit))
+        let iva = pUnit * 0.12
+        let pVenta = ((pUnit + iva)* 0.5)+(pUnit + iva)
+        await Compra.updateOne({_id: req.params.idCompra, "productos._id": req.params.idObjProd},{
+            $set:{
+                "productos.$":{
+                    producto:{
+                        detalle:req.body.detail,
+                        cantidad:req.body.cantidad,
+                        precioTotal:pUnit*req.body.cantidad,
+                    }
+                }
+            }
+        }, async(error)=>{
+            if(error){
+                console.log(error);
+                let newCompra= await Compra.findById({_id: req.params.idCompra})
+                res.render('newProducto', {
+                    user: req.user,
+                    newCompra,
+                    message: 'No se pudo editar el producto de la factura',
+                })
+            }else{
+                let prod = await Product.findById({_id:req.params.idProd})
+                console.log(`PRODUCTO: ${prod}`);
+                console.log(parseInt((prod.stock)));
+                await Product.updateOne({_id: req.params.idProd},{
+                    detalle: req.body.detail,
+                    stock: parseInt((prod.stock))-parseInt((req.params.cant))+parseInt((req.body.cantidad)),
+                    precioUnit: pUnit,
+                    iva: iva,
+                    precioVenta: pVenta
+                }, async(error)=>{
+                    if(error){
+                        console.log(error);
+                    }else{
+                        let newCompra= await Compra.findById({_id: req.params.idCompra})
+                        res.render('newProducto', {
+                            user: req.user,
+                            newCompra,
+                            message: 'Producto actualizado',
+                        })
+                    }
                 })
             }
         })

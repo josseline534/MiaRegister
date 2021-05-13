@@ -21,3 +21,8 @@ let mensaje = document.getElementById('mensaje')
 setTimeout(()=>{
     mensaje.style.display='none'
 },1500)
+
+const mostrar = () =>{
+    btnEditar.style.display='block'
+    btnAnadir.style.display='none'
+}
