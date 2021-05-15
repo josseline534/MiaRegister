@@ -140,7 +140,6 @@ let controller = {
                                             user: req.user,
                                             newCompra,
                                             message: 'No se pudo registrar el producto en la factura',
-            
                                         })
                                     }else{
                                         await Compra.updateOne({_id : id},{

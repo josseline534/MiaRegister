@@ -7,10 +7,12 @@ const Compra = require('../models/compra')
 const Product = require('../models/producto')
 
 let controller ={
-    compras: (req, res)=>{
+    compras: async(req, res)=>{
         if(req.isAuthenticated()){
+            const compras = await Compra.find()
             res.render('compras',{
                 user: req.user,
+                compras
             })
         }else{
             res.redirect('/')
@@ -25,9 +27,6 @@ let controller ={
         try{
             var codigo = !validator.isEmpty(req.body.codigo)
             var proveedor = !validator.isEmpty(req.body.proveedor)
-            var total = !validator.isFloat(req.body.total)
-            var iva = !validator.isFloat(req.body.iva)
-            var subtotal = !validator.isFloat(req.body.subTotal)
         }catch(error){
             console.log(`ERROR COMPRA: ${error}`);
             req.flash('failedCompra','Faltan campos por llenar')
@@ -35,15 +34,14 @@ let controller ={
                 user: req.user
             })
         }
-        if(codigo && proveedor &&
-            total && iva && subtotal){
+        if(codigo && proveedor){
             let newCompra = new Compra()
             newCompra.codigo = req.body.codigo
             newCompra.proveedor = req.body.proveedor
             newCompra.fecha = req.body.fecha
             newCompra.total = req.body.total
             newCompra.iva = req.body.iva
-            newCompra.subtotal = req.body.subtotal
+            newCompra.subtotal = req.body.subTotal
             newCompra.save((error)=>{
                 if(error){
                     console.log(`ERROR ${error}`);
@@ -113,8 +111,6 @@ let controller ={
         })
     },
     update:async(req, res) =>{
-        console.log(req.body);
-        console.log(req.params);
         //Calculo de IVA y Precio de Venta
         let pUnit = parseFloat((req.body.pUnit))
         let iva = pUnit * 0.12
@@ -140,7 +136,6 @@ let controller ={
                 })
             }else{
                 let prod = await Product.findById({_id:req.params.idProd})
-                console.log(`PRODUCTO: ${prod}`);
                 console.log(parseInt((prod.stock)));
                 await Product.updateOne({_id: req.params.idProd},{
                     detalle: req.body.detail,

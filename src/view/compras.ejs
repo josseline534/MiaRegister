@@ -31,6 +31,25 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <% for( i = compras.length-1; i >= 0 ; i--){%>
+                            <tr>
+                                <td><%= compras.length - i  %></td>
+                                <td><%= compras[i].codigo %></td>
+                                <td><%= compras[i].proveedor %></td>
+                                <td><%= compras[i].fecha.getDate() %>-<%=compras[i].fecha.getMonth() %>-<%=compras[i].fecha.getFullYear()%></td>
+                                <td><%= compras[i].subtotal %></td>
+                                <td>
+                                    <a href=""
+                                    class="btn btn-danger">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                    <a href=""
+                                    class="btn btn-info">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        <%}%>
                     </tbody>
                 </table>
             </div>

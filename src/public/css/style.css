@@ -185,3 +185,7 @@ color: blanchedalmond;
 #cedError .alert.alert-danger.alert-dismissible.fade.show{
     padding: 0.5px;
 }
+/*---------------MODAL-----------------*/
+.modal-content.myModal{
+    background-color: white;
+}

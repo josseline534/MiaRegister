@@ -1,7 +1,7 @@
 <%- include('./partials/_header.ejs'); -%>
     <title>Editar Producto</title>
 </head>
-<body class="principal">
+<body class="principal" onpaste="return false">
     <div class="d-flex">
         <%- include('./partials/_menu.ejs'); -%>
         <div class="w-100">
@@ -29,6 +29,7 @@
                                     type="number"
                                     placeholder="Cantidad"
                                     value="<%=cant%>"
+                                    onkeypress='return validaCantidad(event)'
                                     required>
                                 </div>
                                 <div class="form-group pUnitGroup">
@@ -37,6 +38,7 @@
                                     type="text"
                                     placeholder="Precio Unitario"
                                     value="<%=prod.precioUnit%>"
+                                    onkeypress='return validaPrecio(event)'
                                     required>
                                 </div>
                                 <div class="btn-toolbar justify-content-md-center">
@@ -58,9 +60,6 @@
                             <%=message%>
                         </div>
                     <%}%>
-                    <p >
-                        <%=prod%>
-                    </p>
                     <table class="table table-bordered table-striped">
                         <thead class="tablePrimary">
                             <tr>
@@ -81,11 +80,11 @@
                                     <td>
                                         <a
                                         href="/compras/deleteProducto/<%=newCompra._id%>&<%=newCompra.productos[i].producto.id%>&<%=newCompra.productos[i].producto.cantidad%>&<%=newCompra.productos[i]._id%>"
-                                        class="btn btn-danger">
+                                        class="btn btn-danger" disabled>
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
                                         <a href="/compras/editProducto/<%=newCompra._id%>&<%=newCompra.productos[i].producto.id%>&<%=newCompra.productos[i]._id%>"
-                                        class="btn btn-info">
+                                        class="btn btn-info" disabled>
                                             <i class="fas fa-pen"></i>
                                         </a>
                                     </td>
