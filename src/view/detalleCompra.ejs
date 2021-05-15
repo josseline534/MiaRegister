@@ -1,0 +1,93 @@
+<%- include('./partials/_header.ejs'); -%>
+    <title>Productos</title>
+</head>
+<body class="principal" onpaste="return false">
+    <div class="d-flex">
+        <%- include('./partials/_menu.ejs'); -%>
+        <div class="w-100">
+            <div class="d-flex">
+            </div>
+            <div class="d-flex mt-5">
+                <div class="col-sm-4 text-center modal-dialog">
+                    <div class="mainSection">
+                        <div class="modal-content">
+                            <div class="col-12 userImg">
+                                <img class="imagen" src="/img/product.png" alt="Product">
+                            </div>
+                            <div class="card border-info text-dark mb-3 ml-3 mr-3" style="max-width: 18rem;">
+                                <div class="card-header h3">Factura</div>
+                                <div class="card-body">
+                                    <h5 class="card-title text-primary"><%= compra.codigo %></h5>
+                                    <ul class="list-group list-group-flush text-left">
+                                        <li class="list-group-item">
+                                            <strong>Proveedor:</strong>
+                                            <%= compra.proveedor %>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Fecha:</strong>
+                                            <%= compra.fecha.getDate() %>-<%= compra.fecha.getMonth() %>-<%= compra.fecha.getFullYear() %>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Total:</strong>
+                                            <%= compra.total %>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>IVA:</strong>
+                                            <%= compra.iva %>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Subtotal:</strong>
+                                            <%= compra.subtotal %>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8 mt-5 mr-3">
+                    <table class="table table-bordered table-striped">
+                        <thead class="tablePrimary">
+                            <tr>
+                                <th>Num.</th>
+                                <th>Detalle</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for (let i=0; i < compra.productos.length; i++){%>
+                                <tr>
+                                    <td><%= i+1 %></td>
+                                    <td><%= compra.productos[i].producto.detalle %></td>
+                                    <td><%= compra.productos[i].producto.cantidad %></td>
+                                    <td><%= parseFloat(compra.productos[i].producto.precioTotal).toFixed(2) %></td>
+                                </tr>
+                            <%}%>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td class="tablePrimary">
+                                    <strong>Total:</strong>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <strong>
+                                        <%= total %>
+                                    </strong>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <div class="offset-9">
+                        <a href="/compras"
+                        class="button btn btn-warning">
+                            <i class="fas fa-arrow-alt-circle-left"></i>  Finalizar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<%- include('./partials/_footer.ejs'); -%>

@@ -189,3 +189,7 @@ color: blanchedalmond;
 .modal-content.myModal{
     background-color: white;
 }
+/*-------------CARD--------------------*/
+.card.cardFactura, .card.cardFactura .list-group-item{
+    background-color: #17324a;
+}

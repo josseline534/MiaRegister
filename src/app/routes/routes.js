@@ -6,6 +6,7 @@ const route = express.Router()
 const controller = require('../controller/controller')
 const controllerProduct = require('../controller/product')
 const controllerCompra = require('../controller/compra')
+const { Router } = require('express')
 
 //----------------------USER--------------------------
 // GET
@@ -31,6 +32,7 @@ route.get('/compras', controllerCompra.compras)
 route.get('/compras/formCompra', controllerCompra.formCompra)
 route.get('/compras/deleteProducto/:idCompra&:idProducto&:cant&:id', controllerCompra.delete)
 route.get('/compras/editProducto/:idCompra&:idProducto&:cant&:id', controllerCompra.edit)
+route.get('/compras/detalles/:id', controllerCompra.detail)
 //POST
 route.post('/compras/formCompra', controllerCompra.insert)
 route.post('/compras/editProducto/:idCompra&:idProd&:idObjProd&:cant', controllerCompra.update)

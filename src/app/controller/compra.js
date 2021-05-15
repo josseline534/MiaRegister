@@ -157,6 +157,31 @@ let controller ={
                 })
             }
         })
+    },
+    detail: async(req, res)=>{
+        await Compra.findById({_id: req.params.id}, async(error, compra)=>{
+            if(error){
+                let compras = await Compra.find()
+                res.render('compras',{
+                    user: req.user,
+                    compras
+                })
+            }
+            if(compra){
+                var total = 0
+                for(let i=0; i < compra.productos.length; i++){
+                    console.log(parseFloat(compra.productos[i].producto.precioTotal));
+                    let precioTotal = parseFloat(compra.productos[i].producto.precioTotal)
+                    total = total + precioTotal
+                    console.log(total);
+                }
+                res.render('detalleCompra',{
+                    user: req.user,
+                    compra,
+                    total
+                })
+            }
+        })
     }
 }
 

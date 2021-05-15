@@ -73,9 +73,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <% for (let i=0; i < newCompra.productos.length; i++){%>
+                            <% for (let i=newCompra.productos.length-1; i >= 0; i--){%>
                                 <tr>
-                                    <td><%= i+1 %></td>
+                                    <td><%= newCompra.productos.length - i %></td>
                                     <td><%= newCompra.productos[i].producto.detalle %></td>
                                     <td><%= newCompra.productos[i].producto.cantidad %></td>
                                     <td><%= parseFloat(newCompra.productos[i].producto.precioTotal).toFixed(2) %></td>

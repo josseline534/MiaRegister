@@ -39,11 +39,7 @@
                                 <td><%= compras[i].fecha.getDate() %>-<%=compras[i].fecha.getMonth() %>-<%=compras[i].fecha.getFullYear()%></td>
                                 <td><%= compras[i].subtotal %></td>
                                 <td>
-                                    <a href=""
-                                    class="btn btn-danger">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </a>
-                                    <a href=""
+                                    <a href="/compras/detalles/<%= compras[i]._id %>"
                                     class="btn btn-info">
                                         <i class="fas fa-eye"></i>
                                     </a>
