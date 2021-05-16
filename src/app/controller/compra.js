@@ -12,7 +12,8 @@ let controller ={
             const compras = await Compra.find()
             res.render('compras',{
                 user: req.user,
-                compras
+                compras,
+                message: ''
             })
         }else{
             res.redirect('/')
@@ -179,6 +180,57 @@ let controller ={
                     user: req.user,
                     compra,
                     total
+                })
+            }
+        })
+    },
+    search: async(req, res)=>{
+        console.log(req.body.search);
+        await Compra.find({
+            "$or":[
+                {
+                    "codigo":{
+                        "$regex":req.body.search,
+                        "$options": "i"
+                    }
+                },
+                {
+                    "proveedor":{
+                        "$regex":req.body.search,
+                        "$options": "i"
+                    }
+                },
+                {
+                    "productos.producto.detalle":{
+                        "$regex":req.body.search,
+                        "$options": "i"
+                    }
+                }
+            ]
+        }).sort([['date','descending']])
+        .exec(async (error, compras) => {
+            if(error){
+                console.log(error);
+                const compras = await Compra.find()
+                res.render('compras',{
+                    user: req.user,
+                    compras,
+                    message: 'Ocurrio un error al conectarse con la base de datos'
+                })
+            }
+            if(!compras || compras.length <= 0){
+                const compras = await Compra.find()
+                res.render('compras',{
+                    user: req.user,
+                    compras,
+                    message: 'No existen facturas que coincidan con la búsqueda'
+                })
+            }
+            if(compras){
+                res.render('compras',{
+                    user: req.user,
+                    compras,
+                    message: ''
                 })
             }
         })

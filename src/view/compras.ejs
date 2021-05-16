@@ -9,9 +9,10 @@
                 <a href="/compras/formCompra" class="btn btn-info mt-5"><i class="fas fa-plus"></i>  Nueva Compra</a>
                 <nav class="navbar justify-content-between">
                     <a class="navbar-brand"></a>
-                    <form class="form-inline">
+                    <form class="form-inline" action="/compras/search" method="POST">
                         <input class="form-control mr-sm-2"
                         type="search"
+                        name="search"
                         placeholder="Buscar"
                         aria-label="Search">
                         <button class="btn btn-info my-2 my-sm-0" type="submit">
@@ -19,6 +20,14 @@
                         </button>
                     </form>
                 </nav>
+                <% if (message && message.length > 0 ){%>
+                    <div id="mensaje" class="alert alert-success alert-dismissible fade show message" role="alert">
+                        <%=message%>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                <%}%>
                 <table class="table table-bordered table-striped mt-5">
                     <thead class="tablePrimary">
                         <tr>

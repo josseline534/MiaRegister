@@ -50,7 +50,7 @@ const comprobarCedula =() =>{
 let mensaje = document.getElementById('mensaje')
 setTimeout(()=>{
     mensaje.style.display='none'
-},1500)
+},3000)
 
 const mostrar = () =>{
     btnEditar.style.display='block'

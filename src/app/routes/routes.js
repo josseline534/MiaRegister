@@ -36,4 +36,5 @@ route.get('/compras/detalles/:id', controllerCompra.detail)
 //POST
 route.post('/compras/formCompra', controllerCompra.insert)
 route.post('/compras/editProducto/:idCompra&:idProd&:idObjProd&:cant', controllerCompra.update)
+route.post('/compras/search', controllerCompra.search)
 module.exports = route
