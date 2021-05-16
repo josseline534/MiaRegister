@@ -1,0 +1,115 @@
+<%- include('./partials/_header.ejs'); -%>
+    <title>Productos</title>
+</head>
+<body class="principal">
+    <div class="d-flex">
+        <%- include('./partials/_menu.ejs'); -%>
+        <div class="w-100">
+            <div class="container mb-5 ">
+                <a href="" class="btn btn-info mt-5"><i class="fas fa-plus"></i>  Nuevo Producto</a>
+                <nav class="navbar justify-content-between">
+                    <a class="navbar-brand"></a>
+                    <form class="form-inline" action="/productos/search" method="POST">
+                        <input class="form-control mr-sm-2"
+                        type="search"
+                        name="search"
+                        placeholder="Buscar"
+                        aria-label="Search">
+                        <button class="btn btn-info my-2 my-sm-0" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </nav>
+                <% if (message && message.length > 0 ){%>
+                    <div id="mensaje" class="alert alert-success alert-dismissible fade show message" role="alert">
+                        <%=message%>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                <%}%>
+                <% if (messageFailed && messageFailed.length > 0 ){%>
+                    <div id="mensaje" class="alert alert-danger alert-dismissible fade show message" role="alert">
+                        <%=messageFailed%>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                <%}%>
+                <table class="table table-bordered table-striped mt-5">
+                    <thead class="tablePrimary">
+                        <tr>
+                            <th>Num.</th>
+                            <th>Detalle</th>
+                            <th>Stock</th>
+                            <th>Precio</th>
+                            <th>Operación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for( i = productos.length-1; i >= 0 ; i--){%>
+                            <tr>
+                                <td><%= productos.length - i  %></td>
+                                <td><%= productos[i].detalle %></td>
+                                <td><%= productos[i].stock %></td>
+                                <td><%= parseFloat(productos[i].precioVenta).toFixed(2) %></td>
+                                <td>
+                                    <a href=""
+                                        class="btn btn-danger"
+                                        data-toggle="modal"
+                                        data-target="#deleteModal">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                    <!-- Modal Delete-->
+                                    <div class="modal fade" id="deleteModal"
+                                    tabindex="-1" role="dialog"
+                                    aria-labelledby="deleteModalLabel"
+                                    aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                        <div class="modal-content myModal">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title text-danger" id="deleteModalLabel">
+                                                    <i class="fas fa-trash-alt"></i> Eliminar Producto
+                                                </h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body font-weight-bold text-center">
+                                                <p>¿Está seguro de eliminar el producto <%= productos[i].detalle %>?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <a
+                                                href="/productos/delete/<%= productos[i]._id %>"
+                                                type="button"
+                                                class="btn btn-danger">
+                                                    Eliminar
+                                                </a>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <a href=""
+                                        class="btn btn-info"
+                                        data-toggle="tooltip"
+                                        data-placement="bottom"
+                                        title="Editar">
+                                            <i class="fas fa-pen"></i>
+                                    </a>
+                                    <a href=""
+                                        class="btn btn-success"
+                                        data-toggle="tooltip"
+                                        data-placement="bottom"
+                                        title="Vender">
+                                            <i class="fab fa-sellcast"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        <%}%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<%- include('./partials/_footer.ejs'); -%>

@@ -2,8 +2,6 @@
 
 let validator = require('validator')
 
-const passport = require('../../config/passport')
-const User = require('../models/user')
 const Product = require('../models/producto')
 const Compra = require('../models/compra')
 
@@ -168,5 +166,91 @@ let controller = {
             })
         }
     },
+    productos: async (req, res)=>{
+        await Product.find((error, productos)=>{
+            if(error){
+                res.render('productos',{
+                    user: req.user,
+                    productos:[],
+                    messageFailed:'Error al conectarse con la Base de Datos',
+                    message:''
+                })
+            }
+            if(!productos || productos.length <=0){
+                res.render('productos',{
+                    user: req.user,
+                    productos:[],
+                    messageFailed:'',
+                    message:'No existen productos para mostrar'
+                })
+            }else{
+                res.render('productos',{
+                    user: req.user,
+                    productos,
+                    messageFailed:'',
+                    message:''
+                })
+            }
+        })
+    },
+    delete: async(req, res)=>{
+        await Product.findByIdAndDelete({_id: req.params.id}, async (error)=>{
+            let productos = await Product.find()
+            if(error){
+                res.render('productos',{
+                    user: req.user,
+                    productos,
+                    messageFailed:'No se pudo eliminar el producto',
+                    message:''
+                })
+            }else{
+                res.render('productos',{
+                    user: req.user,
+                    productos,
+                    messageFailed:'',
+                    message:'Producto eliminado'
+                })
+            }
+        })
+    },
+    search: async(req, res)=>{
+        console.log(req.body.search);
+        await Product.find({
+            "$or":[
+                {
+                    "detalle":{
+                        "$regex":req.body.search,
+                        "$options": "i"
+                    }
+                },
+            ]
+        }).exec(async (error, productos)=>{
+            if(error){
+                const productos = await Product.find()
+                res.render('productos',{
+                    user: req.user,
+                    productos,
+                    messageFailed:'Error al conectarse con la Base de Datos',
+                    message:''
+                })
+            }
+            if(!productos || productos.length <=0){
+                const productos = await Product.find()
+                res.render('productos',{
+                    user: req.user,
+                    productos,
+                    messageFailed:'',
+                    message:'No existen productos que coincidan con la búsqueda'
+                })
+            }else{
+                res.render('productos',{
+                    user: req.user,
+                    productos,
+                    messageFailed:'',
+                    message:''
+                })
+            }
+        })
+    }
 }
 module.exports = controller

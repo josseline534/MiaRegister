@@ -185,7 +185,6 @@ let controller ={
         })
     },
     search: async(req, res)=>{
-        console.log(req.body.search);
         await Compra.find({
             "$or":[
                 {

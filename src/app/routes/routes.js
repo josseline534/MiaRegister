@@ -24,8 +24,12 @@ route.post('/users', controller.signIn)
 route.post('/user/edit/:id', controller.update)
 
 //----------------------PRODUCT--------------------------
+//GET
+route.get('/productos', controllerProduct.productos)
+route.get('/productos/delete/:id', controllerProduct.delete)
 //POST
 route.post('/compras/addProducto/:id', controllerProduct.formProducto)
+route.post('/productos/search', controllerProduct.search)
 
 //----------------------COMPRA--------------------------
 route.get('/compras', controllerCompra.compras)
