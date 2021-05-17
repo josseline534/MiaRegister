@@ -37,6 +37,9 @@ height: 12rem;
 .mainSection.sectionLogin{
     margin-top: 30%;
 }
+.mainSection.editProducto{
+    margin-top: 20%;
+}
 .userImg {
 margin-top: -100px;
 }
@@ -113,10 +116,10 @@ border-radius: 5px;
 }
 .form-group.totalGroup::before,
 .form-group.subTotalGroup::before,
-.form-group.pUnitGroup::before{
+.form-group.pUnitGroup::before {
     content: "\f155";
 }
-.form-group.ivaGroup::before{
+.form-group.ivaGroup::before {
     content: "\f4c0";
 }
 .form-group.detailGroup::before {
@@ -124,6 +127,9 @@ border-radius: 5px;
 }
 .form-group.cantidadGroup::before {
     content: "\f0cb";
+}
+.form-group.gananciaGroup::before {
+    content: "\f295";
 }
 .button {
 width: 60%;

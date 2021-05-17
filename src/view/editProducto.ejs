@@ -1,0 +1,69 @@
+<%- include('./partials/_header.ejs'); -%>
+    <title>Editar</title>
+</head>
+<body class="principal" onpaste="return false">
+    <div class="d-flex">
+        <%- include('./partials/_menu.ejs'); -%>
+        <div class="w-100">
+            <div class="text-center modal-dialog">
+                <div class="col-sm-8 mainSection editProducto">
+                    <div class="modal-content">
+                        <div class="col-12 userImg ">
+                            <img class="imagen" src="/img/product.png" alt="Producto">
+                        </div>
+                        <form action="/productos/editar/<%= producto._id %>" method="POST" class="col-12 ">
+                            <div class="form-group detailGroup">
+                                <input class="form-control"
+                                name="detail"
+                                type="text"
+                                placeholder="Detalle"
+                                required
+                                value= "<%= producto.detalle %>">
+                            </div>
+                            <div class="form-group cantidadGroup">
+                                <input class="form-control"
+                                name="stock"
+                                type="number"
+                                placeholder="Stock"
+                                required
+                                onkeypress='return validaCantidad(event)'
+                                value= "<%= producto.stock %>">
+                            </div>
+                            <div class="form-group pUnitGroup">
+                                <input class="form-control"
+                                name="pUnit"
+                                id="pUnit"
+                                type="text"
+                                placeholder="Precio Unitario"
+                                required
+                                onkeypress='return validaPrecio(event)'
+                                value= "<%= producto.precioUnit %>">
+                            </div>
+                            <div class="form-group gananciaGroup">
+                                <input class="form-control"
+                                name="ganancia"
+                                type="number"
+                                placeholder="Ganancia"
+                                required
+                                onkeypress='return validaCantidad(event)'
+                                value= "<%= producto.ganancia %>">
+                            </div>
+                            <div class="btn-toolbar justify-content-md-center">
+                                <div class="btn-group mr-4">
+                                    <a href="/productos" class="button btn btn-warning form-control">
+                                        <i class="fas fa-arrow-alt-circle-left"></i>  Cancelar
+                                    </a>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="submit" class="button btn btn-info form-control">
+                                        <i class="fas fa-sign-in-alt"></i>  Actualizar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<%- include('./partials/_footer.ejs'); -%>

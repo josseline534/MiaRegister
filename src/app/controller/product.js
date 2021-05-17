@@ -38,6 +38,7 @@ let controller = {
                         detalle: req.body.detail,
                         stock: parseInt(producto.stock) + parseInt(req.body.cantidad),
                         precioUnit: pUnit,
+                        ganancia:50,
                         iva: iva,
                         precioVenta: pVenta
                     }, async(error)=>{
@@ -105,6 +106,7 @@ let controller = {
                         newProducto.detalle = req.body.detail
                         newProducto.stock = req.body.cantidad
                         newProducto.precioUnit = req.body.pUnit
+                        newProducto.ganancia = 50
                         newProducto.iva = iva.toString()
                         newProducto.precioVenta = pVenta.toString()
                         //Guardar
@@ -250,6 +252,49 @@ let controller = {
                     message:''
                 })
             }
+        })
+    },
+    edit: async(req, res)=>{
+        await Product.findById({_id: req.params.id}, (error, producto)=>{
+            if(error){
+                res.render('productos',{
+                    user: req.user,
+                    productos,
+                    messageFailed:'Error al conectarse con la Base de Datos',
+                    message:''
+                })
+            }
+            if(producto){
+                res.render('editProducto',{
+                    user: req.user,
+                    producto,
+                    message:'',
+                    messageFailed:''
+                })
+            }
+        })
+    },
+    update: async(req, res)=>{
+        let pUnit = parseFloat(req.body.pUnit)
+        let ganancia = parseInt(req.body.ganancia)
+        let iva = pUnit * 0.12
+        let total = pUnit + iva
+        let pVenta = (total * (ganancia/100)) + total
+        await Product.updateOne({_id: req.params.id},{
+            detalle: req.body.detail,
+            stock: parseInt(req.body.stock),
+            precioUnit: pUnit,
+            iva,
+            ganancia,
+            precioVenta:pVenta
+
+        })
+        let productos = await Product.find()
+        res.render('productos',{
+            user: req.user,
+            productos,
+            messageFailed:'',
+            message:`Producto ${req.body.detail} actualizado correctamente`
         })
     }
 }

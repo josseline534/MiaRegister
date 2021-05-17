@@ -15,6 +15,7 @@ let ProductSchema = Schema({
     },
     precioUnit: String,
     iva: String,
+    ganancia: Number,
     precioVenta: String,
 
 })

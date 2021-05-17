@@ -27,9 +27,11 @@ route.post('/user/edit/:id', controller.update)
 //GET
 route.get('/productos', controllerProduct.productos)
 route.get('/productos/delete/:id', controllerProduct.delete)
+route.get('/productos/editar/:id', controllerProduct.edit)
 //POST
 route.post('/compras/addProducto/:id', controllerProduct.formProducto)
 route.post('/productos/search', controllerProduct.search)
+route.post('/productos/editar/:id',controllerProduct.update)
 
 //----------------------COMPRA--------------------------
 route.get('/compras', controllerCompra.compras)
