@@ -6,10 +6,10 @@
         <%- include('./partials/_menu.ejs'); -%>
         <div class="w-100">
             <div class="container mb-5 ">
-                <a href="/compras/formCompra" class="btn btn-info mt-5"><i class="fas fa-plus"></i>  Nueva Compra</a>
+                <a href="/promociones/add" class="btn btn-info mt-5"><i class="fas fa-plus"></i>  Nueva Promoción</a>
                 <nav class="navbar justify-content-between">
                     <a class="navbar-brand"></a>
-                    <form class="form-inline" action="/compras/search" method="POST">
+                    <form class="form-inline" action="/promociones/search" method="POST">
                         <input class="form-control mr-sm-2"
                         type="search"
                         name="search"
@@ -26,28 +26,13 @@
                         <tr>
                             <th>Num.</th>
                             <th>Código</th>
-                            <th>Proveedor</th>
-                            <th>Fecha</th>
-                            <th>Subtotal</th>
-                            <th>Ver más</th>
+                            <th>Detalle</th>
+                            <th>Stock</th>
+                            <th>Precio</th>
+                            <th>Operación</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <% for( i = compras.length-1; i >= 0 ; i--){%>
-                            <tr>
-                                <td><%= compras.length - i  %></td>
-                                <td><%= compras[i].codigo %></td>
-                                <td><%= compras[i].proveedor %></td>
-                                <td><%= compras[i].fecha.getDate() %>-<%=compras[i].fecha.getMonth() %>-<%=compras[i].fecha.getFullYear()%></td>
-                                <td><%= compras[i].subtotal %></td>
-                                <td>
-                                    <a href="/compras/detalles/<%= compras[i]._id %>"
-                                    class="btn btn-info">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        <%}%>
                     </tbody>
                 </table>
             </div>

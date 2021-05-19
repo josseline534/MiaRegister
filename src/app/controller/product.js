@@ -169,31 +169,34 @@ let controller = {
         }
     },
     productos: async (req, res)=>{
-        await Product.find((error, productos)=>{
-            if(error){
-                res.render('productos',{
-                    user: req.user,
-                    productos:[],
-                    messageFailed:'Error al conectarse con la Base de Datos',
-                    message:''
-                })
-            }
-            if(!productos || productos.length <=0){
-                res.render('productos',{
-                    user: req.user,
-                    productos:[],
-                    messageFailed:'',
-                    message:'No existen productos para mostrar'
-                })
-            }else{
-                res.render('productos',{
-                    user: req.user,
-                    productos,
-                    messageFailed:'',
-                    message:''
-                })
-            }
-        })
+        if(req.isAuthenticated()){
+            await Product.find((error, productos)=>{
+                if(error){
+                    res.render('productos',{
+                        user: req.user,
+                        productos:[],
+                        messageFailed:'Error al conectarse con la Base de Datos',
+                        message:''
+                    })
+                }
+                if(!productos || productos.length <=0){
+                    res.render('productos',{
+                        user: req.user,
+                        productos:[],
+                        messageFailed:'',
+                        message:'No existen productos para mostrar'
+                    })
+                }else{
+                    res.render('productos',{
+                        user: req.user,
+                        productos,
+                        messageFailed:'',
+                        message:''
+                    })
+                }
+            })
+        }else
+            res.redirect('/')
     },
     delete: async(req, res)=>{
         await Product.findByIdAndDelete({_id: req.params.id}, async (error)=>{
@@ -216,7 +219,6 @@ let controller = {
         })
     },
     search: async(req, res)=>{
-        console.log(req.body.search);
         await Product.find({
             "$or":[
                 {

@@ -1,6 +1,5 @@
 'use strict'
 
-const e = require('express')
 let validator = require('validator')
 
 const Compra = require('../models/compra')
@@ -13,7 +12,8 @@ let controller ={
             res.render('compras',{
                 user: req.user,
                 compras,
-                message: ''
+                message: '',
+                messageFailed:''
             })
         }else{
             res.redirect('/')
@@ -52,7 +52,7 @@ let controller ={
                         user: req.user,
                         newCompra,
                         message: 'Compra registrada correctamente',
-
+                        messageFailed:''
                     })
                 }
             })
@@ -87,20 +87,21 @@ let controller ={
                 res.render('newProducto', {
                     user: req.user,
                     newCompra,
-                    message: 'No se pudo eliminar el producto de la factura',
+                    message:'',
+                    messageFailed: 'No se pudo eliminar el producto de la factura',
                 })
             }else{
                 res.render('newProducto', {
                     user: req.user,
                     newCompra,
                     message: 'Producto eliminado correctamente',
+                    messageFailed:''
                 })
             }
         })
     },
     edit: async(req, res) =>{
         let prod = await Product.findById({_id: req.params.idProducto})
-        console.log(prod);
         let newCompra = await Compra.findById({_id: req.params.idCompra})
         res.render('prodEdit', {
             user: req.user,
@@ -133,7 +134,8 @@ let controller ={
                 res.render('newProducto', {
                     user: req.user,
                     newCompra,
-                    message: 'No se pudo editar el producto de la factura',
+                    message:'',
+                    messageFailed: 'No se pudo editar el producto de la factura',
                 })
             }else{
                 let prod = await Product.findById({_id:req.params.idProd})
@@ -153,6 +155,7 @@ let controller ={
                             user: req.user,
                             newCompra,
                             message: 'Producto actualizado',
+                            messageFailed:''
                         })
                     }
                 })
@@ -174,7 +177,6 @@ let controller ={
                     console.log(parseFloat(compra.productos[i].producto.precioTotal));
                     let precioTotal = parseFloat(compra.productos[i].producto.precioTotal)
                     total = total + precioTotal
-                    console.log(total);
                 }
                 res.render('detalleCompra',{
                     user: req.user,
@@ -214,7 +216,8 @@ let controller ={
                 res.render('compras',{
                     user: req.user,
                     compras,
-                    message: 'Ocurrio un error al conectarse con la base de datos'
+                    message:'',
+                    messageFailed: 'Ocurrio un error al conectarse con la base de datos'
                 })
             }
             if(!compras || compras.length <= 0){
@@ -222,14 +225,16 @@ let controller ={
                 res.render('compras',{
                     user: req.user,
                     compras,
-                    message: 'No existen facturas que coincidan con la búsqueda'
+                    message:'',
+                    messageFailed: 'No existen facturas que coincidan con la búsqueda'
                 })
             }
             if(compras){
                 res.render('compras',{
                     user: req.user,
                     compras,
-                    message: ''
+                    message: '',
+                    messageFailed:'',
                 })
             }
         })

@@ -19,22 +19,7 @@
                         </button>
                     </form>
                 </nav>
-                <% if (message && message.length > 0 ){%>
-                    <div id="mensaje" class="alert alert-success alert-dismissible fade show message" role="alert">
-                        <%=message%>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                <%}%>
-                <% if (messageFailed && messageFailed.length > 0 ){%>
-                    <div id="mensaje" class="alert alert-danger alert-dismissible fade show message" role="alert">
-                        <%=messageFailed%>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                <%}%>
+                <%- include('./partials/_message.ejs'); -%>
                 <table class="table table-bordered table-striped mt-5">
                     <thead class="tablePrimary">
                         <tr>

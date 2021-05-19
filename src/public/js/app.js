@@ -56,3 +56,23 @@ const mostrar = () =>{
     btnEditar.style.display='block'
     btnAnadir.style.display='none'
 }
+
+const precioVenta = () => {
+    console.log(pUnit.value);
+    let total = (parseFloat(pUnit.value)*0.12) + parseFloat(pUnit.value)
+    let totalGanancia = (total * (parseFloat(ganancia.value)/100))+ total
+    pVenta.value = totalGanancia.toFixed(2)
+}
+
+const llenarDatos = () => {
+    detalle.value = prodDetalle.innerHTML
+}
+
+const cantMax = () => {
+    if(parseInt(cantidad.value) > prodStock.innerHTML ){
+        errorCant.innerHTML=`
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            La cantidad indicada supera el stock
+        </div>`
+    }
+}

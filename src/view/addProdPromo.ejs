@@ -1,0 +1,198 @@
+<%- include('./partials/_header.ejs'); -%>
+    <title>Productos</title>
+</head>
+<body class="principal" onpaste="return false">
+    <div class="d-flex">
+        <%- include('./partials/_menu.ejs'); -%>
+        <div class="w-100">
+            <%- include('./partials/_message.ejs'); -%>
+            <div class="d-flex">
+                <!--Tabla de Búsqueda-->
+                <div class="col-sm-6 text-center ">
+                    <div class="mainSection">
+                        <div class="modal-content">
+                            <h3 class="text-white mb-4"><%=promocion.detalle%></h3>
+                            <form class="form-inline mb-3" action="/promociones/search/<%= promocion._id%>" method="POST">
+                                <div class="form-group">
+                                    <input class="form-control mr-sm-2 "
+                                    type="search"
+                                    name="search"
+                                    placeholder="Buscar"
+                                    aria-label="Search">
+                                    <button class="btn btn-info my-1 my-sm-0" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </form>
+                            <table class="table table-striped bg-warning">
+                                <thead class="bg-warning">
+                                    <tr>
+                                        <th>Num.</th>
+                                        <th>Detalle</th>
+                                        <th>Stock</th>
+                                        <th>Seleccionar</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-secondary">
+                                    <% for(let i=0; i< productos.length;i++){%>
+                                        <tr>
+                                            <td><%= i+1 %></td>
+                                            <td id="prodDetalle"><%= productos[i].detalle %></td>
+                                            <td id="prodStock"><%= productos[i].stock %></td>
+                                            <td>
+                                                <a href="#" class="btn btn-success" onclick="llenarDatos()">
+                                                    <i class="far fa-check-square" ></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <%}%>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!--Formulario de ingreso de productos-->
+                <div class="col-sm-6">
+                    <div class="mainSection">
+                        <div class="modal-content">
+                            <form action="/promociones/addProducto/<%=promocion._id%>" method="POST" class="col-12 mt-3">
+                                <div class="form-group detailGroup">
+                                    <input class="form-control"
+                                        name="detalle"
+                                        id="detalle"
+                                        type="text"
+                                        placeholder="Detalle"
+                                        readonly
+                                        required>
+                                </div>
+                                <div class="form-group cantidadGroup">
+                                    <input class="form-control"
+                                    name="cantidad"
+                                    id="cantidad"
+                                    type="number"
+                                    placeholder="Cantidad"
+                                    onkeypress='return validaCantidad(event)'
+                                    onblur="return cantMax()"
+                                    required>
+                                </div>
+                                <div id="errorCant"></div>
+                                <div class="btn-toolbar justify-content-md-center">
+                                    <div class="btn-group">
+                                        <button type="submit"
+                                        id="btnAnadir"
+                                        class="button btn btn-info form-control">
+                                            <i class="fas fa-cart-plus"></i>  Añadir
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Productos añadidos-->
+            <div class="col-sm-12 mt-2 mr-3">
+                <table class="table table-bordered table-striped">
+                    <thead class="tablePrimary">
+                        <tr>
+                            <th>Num.</th>
+                            <th>Detalle</th>
+                            <th>Cantidad</th>
+                            <th>Operación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for (let i=promocion.productos.length-1; i>=0; i--){%>
+                            <tr>
+                                <td><%= promocion.productos.length-i%></td>
+                                <td><%= promocion.productos[i].id.detalle%></td>
+                                <td><%= promocion.productos[i].cantidad%></td>
+                                <td>
+                                    <a
+                                    class="btn btn-danger"
+                                    data-toggle="modal"
+                                    data-target="#deleteModal"
+                                    >
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                    <!-- Modal Delete-->
+                                    <div class="modal fade" id="deleteModal"
+                                    tabindex="-1" role="dialog"
+                                    aria-labelledby="deleteModalLabel"
+                                    aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                        <div class="modal-content myModal">
+                                            <div class="modal-header">
+                                            <h4 class="modal-title text-danger" id="deleteModalLabel">
+                                                <i class="fas fa-trash-alt"></i> Eliminar Producto
+                                            </h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            </div>
+                                            <div class="modal-body font-weight-bold text-center">
+                                            <p>¿Está seguro de eliminar el producto <%=promocion.productos[i].id.detalle%>?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <a
+                                            href=""
+                                            type="button"
+                                            class="btn btn-danger">
+                                                Eliminar
+                                            </a>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <a href=""
+                                    class="btn btn-info">
+                                        <i class="fas fa-pen"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        <%}%>
+                    </tbody>
+                </table>
+                <div class="offset-9">
+                    <a href="/promociones"
+                    data-toggle="modal"
+                    data-target="#finalizarModal"
+                    class="button btn btn-warning">
+                        <i class="fas fa-arrow-alt-circle-left"></i>  Finalizar
+                    </a>
+                    <!-- Modal Finalizar-->
+                    <div class="modal fade" id="finalizarModal"
+                    tabindex="-1" role="dialog"
+                    aria-labelledby="finalizarModalLabel"
+                    aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content myModal">
+                            <div class="modal-header">
+                            <h4 class="modal-title text-info" id="finalizarModalLabel">
+                                <i class="fas fa-times-circle"></i> Finalizar
+                            </h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body font-weight-bold text-center">
+                            <p>¿Está seguro de no ingresar más productos?</p>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <a
+                            href="/compras"
+                            type="button"
+                            class="btn btn-warning">
+                                Aceptar
+                            </a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<%- include('./partials/_footer.ejs'); -%>

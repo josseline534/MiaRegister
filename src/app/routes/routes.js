@@ -6,7 +6,7 @@ const route = express.Router()
 const controller = require('../controller/controller')
 const controllerProduct = require('../controller/product')
 const controllerCompra = require('../controller/compra')
-const { Router } = require('express')
+const controllerPromociones = require('../controller/promociones')
 
 //----------------------USER--------------------------
 // GET
@@ -34,6 +34,7 @@ route.post('/productos/search', controllerProduct.search)
 route.post('/productos/editar/:id',controllerProduct.update)
 
 //----------------------COMPRA--------------------------
+//GET
 route.get('/compras', controllerCompra.compras)
 route.get('/compras/formCompra', controllerCompra.formCompra)
 route.get('/compras/deleteProducto/:idCompra&:idProducto&:cant&:id', controllerCompra.delete)
@@ -43,4 +44,13 @@ route.get('/compras/detalles/:id', controllerCompra.detail)
 route.post('/compras/formCompra', controllerCompra.insert)
 route.post('/compras/editProducto/:idCompra&:idProd&:idObjProd&:cant', controllerCompra.update)
 route.post('/compras/search', controllerCompra.search)
+
+//----------------------COMPRA--------------------------
+//GET
+route.get('/promociones', controllerPromociones.promociones)
+route.get('/promociones/add', controllerPromociones.formInsert)
+//POST
+route.post('/promociones/add', controllerPromociones.insert)
+route.post('/promociones/search/:id', controllerPromociones.search)
+route.post('/promociones/addProducto/:id', controllerPromociones.insertProd)
 module.exports = route
