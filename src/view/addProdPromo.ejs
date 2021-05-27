@@ -1,5 +1,5 @@
 <%- include('./partials/_header.ejs'); -%>
-    <title>Productos</title>
+    <title>Promoción</title>
 </head>
 <body class="principal" onpaste="return false">
     <div class="d-flex">
@@ -98,15 +98,15 @@
                             <th>Num.</th>
                             <th>Detalle</th>
                             <th>Cantidad</th>
-                            <th>Operación</th>
+                            <th>Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
                         <% for (let i=promocion.productos.length-1; i>=0; i--){%>
                             <tr>
                                 <td><%= promocion.productos.length-i%></td>
-                                <td><%= promocion.productos[i].id.detalle%></td>
-                                <td><%= promocion.productos[i].cantidad%></td>
+                                <td id="productoDetalle"><%= promocion.productos[i].id.detalle%></td>
+                                <td id="productoCantidad"><%= promocion.productos[i].cantidad%></td>
                                 <td>
                                     <a
                                     class="btn btn-danger"
@@ -136,7 +136,7 @@
                                             <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                             <a
-                                            href=""
+                                            href="/promociones/delete/<%=promocion._id%>&<%=promocion.productos[i].id.detalle%>&<%=promocion.productos[i]._id%>"
                                             type="button"
                                             class="btn btn-danger">
                                                 Eliminar
@@ -145,17 +145,13 @@
                                         </div>
                                         </div>
                                     </div>
-                                    <a href=""
-                                    class="btn btn-info">
-                                        <i class="fas fa-pen"></i>
-                                    </a>
                                 </td>
                             </tr>
                         <%}%>
                     </tbody>
                 </table>
                 <div class="offset-9">
-                    <a href="/promociones"
+                    <a href=""
                     data-toggle="modal"
                     data-target="#finalizarModal"
                     class="button btn btn-warning">
@@ -182,7 +178,7 @@
                             <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             <a
-                            href="/compras"
+                            href="/promociones"
                             type="button"
                             class="btn btn-warning">
                                 Aceptar

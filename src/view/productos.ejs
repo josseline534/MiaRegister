@@ -38,42 +38,10 @@
                                 <td><%= productos[i].stock %></td>
                                 <td><%= parseFloat(productos[i].precioVenta).toFixed(2) %></td>
                                 <td>
-                                    <a href=""
-                                        class="btn btn-danger"
-                                        data-toggle="modal"
-                                        data-target="#deleteModal">
+                                    <a href="/productos/delete/<%= productos[i]._id %>"
+                                        class="btn btn-danger">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
-                                    <!-- Modal Delete-->
-                                    <div class="modal fade" id="deleteModal"
-                                    tabindex="-1" role="dialog"
-                                    aria-labelledby="deleteModalLabel"
-                                    aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                        <div class="modal-content myModal">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title text-danger" id="deleteModalLabel">
-                                                    <i class="fas fa-trash-alt"></i> Eliminar Producto
-                                                </h4>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body font-weight-bold text-center">
-                                                <p>¿Está seguro de eliminar el producto <%= productos[i].detalle %>?</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <a
-                                                href="/productos/delete/<%= productos[i]._id %>"
-                                                type="button"
-                                                class="btn btn-danger">
-                                                    Eliminar
-                                                </a>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
                                     <a href="/productos/editar/<%= productos[i]._id %>"
                                         class="btn btn-info"
                                         data-toggle="tooltip"
@@ -81,7 +49,7 @@
                                         title="Editar">
                                             <i class="fas fa-pen"></i>
                                     </a>
-                                    <a href=""
+                                    <a href="/venta/llenarProducto/<%=productos[i]._id%>&"
                                         class="btn btn-success"
                                         data-toggle="tooltip"
                                         data-placement="bottom"

@@ -68,6 +68,12 @@ const llenarDatos = () => {
     detalle.value = prodDetalle.innerHTML
 }
 
+const llenarDatosEditar = () => {
+    detalle.value = productoDetalle.innerHTML
+    cantidad.value = productoCantidad.innerHTML
+    btnEditar.style.display = 'block'
+    btnAnadir.style.display = 'none'
+}
 const cantMax = () => {
     if(parseInt(cantidad.value) > prodStock.innerHTML ){
         errorCant.innerHTML=`

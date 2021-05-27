@@ -1,15 +1,15 @@
 <%- include('./partials/_header.ejs'); -%>
-    <title>Compras</title>
+    <title>Venta</title>
 </head>
 <body class="principal">
     <div class="d-flex">
         <%- include('./partials/_menu.ejs'); -%>
         <div class="w-100">
             <div class="container mb-5 ">
-                <a href="/compras/formCompra" class="btn btn-info mt-5"><i class="fas fa-plus"></i>  Nueva Compra</a>
-                <nav class="navbar justify-content-between">
+                <a href="/venta/formVentas" class="btn btn-info mt-5"><i class="fas fa-plus"></i>  Nueva Venta</a>
+                <nav class="navbar justify-content-between mt-lg-5">
                     <a class="navbar-brand"></a>
-                    <form class="form-inline" action="/compras/search" method="POST">
+                    <form class="form-inline" action="" method="POST">
                         <input class="form-control mr-sm-2"
                         type="search"
                         name="search"
@@ -24,24 +24,20 @@
                 <table class="table table-bordered table-striped mt-5">
                     <thead class="tablePrimary">
                         <tr>
-                            <th>Num.</th>
-                            <th>Código</th>
-                            <th>Proveedor</th>
+                            <th>Codigo</th>
                             <th>Fecha</th>
-                            <th>Subtotal</th>
-                            <th>Ver más</th>
+                            <th>Total</th>
+                            <th>Operación</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <% for( i = compras.length-1; i >= 0 ; i--){%>
+                        <% for(let i=ventas.length-1; i>=0; i-- ){%>
                             <tr>
-                                <td><%= compras.length - i  %></td>
-                                <td><%= compras[i].codigo %></td>
-                                <td><%= compras[i].proveedor %></td>
-                                <td><%= compras[i].fecha.getDate() %>-<%=compras[i].fecha.getMonth() %>-<%=compras[i].fecha.getFullYear()%></td>
-                                <td><%= compras[i].subtotal %></td>
+                                <td><%=ventas[i].codigo%></td>
+                                <td><%=(ventas[i].fecha).toUTCString()%></td>
+                                <td><%=parseFloat(ventas[i].total).toFixed(2)%></td>
                                 <td>
-                                    <a href="/compras/detalles/<%= compras[i]._id %>"
+                                    <a href=""
                                     class="btn btn-info">
                                         <i class="fas fa-eye"></i>
                                     </a>

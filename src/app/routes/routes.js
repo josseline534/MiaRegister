@@ -7,6 +7,7 @@ const controller = require('../controller/controller')
 const controllerProduct = require('../controller/product')
 const controllerCompra = require('../controller/compra')
 const controllerPromociones = require('../controller/promociones')
+const controllerVenta = require('../controller/venta')
 
 //----------------------USER--------------------------
 // GET
@@ -45,12 +46,26 @@ route.post('/compras/formCompra', controllerCompra.insert)
 route.post('/compras/editProducto/:idCompra&:idProd&:idObjProd&:cant', controllerCompra.update)
 route.post('/compras/search', controllerCompra.search)
 
-//----------------------COMPRA--------------------------
+//----------------------PROMOCIONES--------------------------
 //GET
 route.get('/promociones', controllerPromociones.promociones)
 route.get('/promociones/add', controllerPromociones.formInsert)
+route.get('/promociones/delete/:idPromocion&:detalle&:idObject', controllerPromociones.delete)
+route.get('/promociones/deleteProd/:id', controllerPromociones.deletePromocion)
 //POST
 route.post('/promociones/add', controllerPromociones.insert)
 route.post('/promociones/search/:id', controllerPromociones.search)
+route.post('/promociones/searchPromocion', controllerPromociones.searchPromocion)
 route.post('/promociones/addProducto/:id', controllerPromociones.insertProd)
+
+//----------------------VENTA--------------------------
+//GET
+route.get('/ventas', controllerVenta.venta)
+route.get('/venta/formVentas', controllerVenta.formVenta)
+route.get('/venta/llenarPromocion/:idpromocion&:idventa?', controllerVenta.llenarProm)
+route.get('/venta/llenarProducto/:idproducto&:idventa?', controllerVenta.llenarProd)
+route.get('/ventas/delete/producto/:idVenta&:idObject', controllerVenta.delete)
+//POST
+route.post('/ventas/search/:id?', controllerVenta.search)
+route.post('/venta/producto/:idVenta?', controllerVenta.add)
 module.exports = route

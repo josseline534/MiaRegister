@@ -47,43 +47,12 @@
                                 <% if( user.user != usuarios[i].user){ %>
                                 <td>
                                     <a
-                                        class="btn btn-danger"
-                                        data-toggle="modal"
-                                        data-target="#deleteModal">
+                                        href="/user/delete/<%= usuarios[i]._id %>"
+                                        class="btn btn-danger">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                     <a href="/user/edit/<%= usuarios[i]._id %>" class="btn btn-info"><i class="fas fa-pen"></i></a>
                                 </td>
-                                <!-- Modal Delete-->
-                                <div class="modal fade" id="deleteModal"
-                                tabindex="-1" role="dialog"
-                                aria-labelledby="deleteModalLabel"
-                                aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                    <div class="modal-content myModal">
-                                        <div class="modal-header">
-                                        <h4 class="modal-title text-danger" id="deleteModalLabel">
-                                            <i class="fas fa-user-times"></i> Eliminar Usuario
-                                        </h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        </div>
-                                        <div class="modal-body font-weight-bold text-center">
-                                        <p>¿Está seguro de eliminar el Usuario <%=usuarios[i].user%>?</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <a
-                                            href="/user/delete/<%= usuarios[i]._id %>"
-                                            type="button"
-                                            class="btn btn-danger">
-                                            Eliminar
-                                        </a>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
                                 <% } %>
                             </tr>
                         <% } %>

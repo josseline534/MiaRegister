@@ -4,7 +4,10 @@ let mongoose = require('mongoose')
 let Schema = mongoose.Schema
 
 const promocionSchema = new Schema({
-    codigo: String,
+    codigo: {
+        type: String,
+        unique: true
+    },
     detalle: String,
     stock: Number,
     precio: String,
