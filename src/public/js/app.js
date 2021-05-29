@@ -52,7 +52,7 @@ setTimeout(()=>{
     mensaje.style.display='none'
 },3000)
 
-const mostrar = () =>{
+const mostrarPromo = () =>{
     btnEditar.style.display='block'
     btnAnadir.style.display='none'
 }

@@ -65,6 +65,7 @@ route.get('/venta/formVentas', controllerVenta.formVenta)
 route.get('/venta/llenarPromocion/:idpromocion&:idventa?', controllerVenta.llenarProm)
 route.get('/venta/llenarProducto/:idproducto&:idventa?', controllerVenta.llenarProd)
 route.get('/ventas/delete/producto/:idVenta&:idObject', controllerVenta.delete)
+route.get('/ventas/detalle/:id', controllerVenta.detail)
 //POST
 route.post('/ventas/search/:id?', controllerVenta.search)
 route.post('/venta/producto/:idVenta?', controllerVenta.add)

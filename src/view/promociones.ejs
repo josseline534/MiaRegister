@@ -21,7 +21,7 @@
                     </form>
                 </nav>
                 <%- include('./partials/_message.ejs'); -%>
-                <table class="table table-bordered table-striped mt-5">
+                <table class="table table-bordered table-striped mt-3">
                     <thead class="tablePrimary">
                         <tr>
                             <th>Num.</th>
@@ -29,10 +29,11 @@
                             <th>Detalle</th>
                             <th>Stock</th>
                             <th>Precio</th>
+                            <th>Contenido</th>
                             <th>Operación</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="">
                         <% for(let i = promociones.length-1; i>=0; i--){%>
                             <tr>
                                 <td><%=promociones.length-i%></td>
@@ -40,58 +41,18 @@
                                 <td><%=promociones[i].detalle%></td>
                                 <td><%=promociones[i].stock%></td>
                                 <td><%=promociones[i].precio%></td>
+                                <% for(let j=0; j < promociones[i].productos.length; j++){%>
+                                    <td class="d-flex justify-content-between ">
+                                        <%=promociones[i].productos[j].id.detalle%>
+                                        <span class="badge">
+                                            <%=promociones[i].productos[j].cantidad%>
+                                        </span>
+                                    </td>
+                                <%}%>
                                 <td>
-                                    <a href=""
-                                    class="btn btn-info"
-                                    data-toggle="modal"
-                                    data-target="#verModal">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                    <!--Modal ver-->
-                                    <div class="modal fade" id="verModal"
-                                    tabindex="-1" role="dialog"
-                                    aria-labelledby="verModalLabel"
-                                    aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content myModal">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title text-danger" id="verModalLabel">
-                                                        <i class="fas fa-gift mr-2"></i> <%=promociones[i].detalle%>
-                                                    </h4>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body font-weight-bold text-center">
-                                                    <ul class="list-group">
-                                                        <li class="list-group-item active strong">Contenido:</li>
-                                                        <% for(let j=0; j < promociones[i].productos.length; j++){%>
-                                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                                <%=promociones[i].productos[j].id.detalle%>
-                                                                <span class="badge badge-primary badge-pill">
-                                                                    <%=promociones[i].productos[j].cantidad%>
-                                                                </span>
-                                                            </li>
-                                                        <%}%>
-                                                    </ul>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <a
-                                                    href=""
-                                                    type="button"
-                                                    class="btn btn-info">
-                                                        Aceptar
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <a
                                     href="/promociones/deleteProd/<%=promociones[i]._id%>"
                                     class="btn btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#deleteModal"
                                     >
                                         <i class="fas fa-trash-alt"></i>
                                     </a>

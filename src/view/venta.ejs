@@ -7,7 +7,7 @@
         <div class="w-100">
             <div class="container mb-5 ">
                 <a href="/venta/formVentas" class="btn btn-info mt-5"><i class="fas fa-plus"></i>  Nueva Venta</a>
-                <nav class="navbar justify-content-between mt-lg-5">
+                <nav class="navbar justify-content-between">
                     <a class="navbar-brand"></a>
                     <form class="form-inline" action="" method="POST">
                         <input class="form-control mr-sm-2"
@@ -21,7 +21,7 @@
                     </form>
                 </nav>
                 <%- include('./partials/_message.ejs'); -%>
-                <table class="table table-bordered table-striped mt-5">
+                <table class="table table-bordered table-striped mt-3">
                     <thead class="tablePrimary">
                         <tr>
                             <th>Codigo</th>
@@ -37,7 +37,7 @@
                                 <td><%=(ventas[i].fecha).toUTCString()%></td>
                                 <td><%=parseFloat(ventas[i].total).toFixed(2)%></td>
                                 <td>
-                                    <a href=""
+                                    <a href="/ventas/detalle/<%=ventas[i]._id%>"
                                     class="btn btn-info">
                                         <i class="fas fa-eye"></i>
                                     </a>

@@ -251,6 +251,7 @@ let controller ={
             let newVenta = new Venta()
             newVenta.codigo = ventas.length+1
             newVenta.fecha = new Date()
+            newVenta.user = req.user
             // Guardar la venta
             newVenta.save(async (error)=>{
                 if(error){
@@ -419,6 +420,13 @@ let controller ={
                 }
             }
         }
+    },
+    detail:async (req, res) => {
+        let venta = await Venta.findById({_id:req.params.id}).populate('user').populate('productos.id').populate('promocion.id')
+        res.render('detalleVenta',{
+            user:req.user,
+            venta
+        })
     }
 }
 

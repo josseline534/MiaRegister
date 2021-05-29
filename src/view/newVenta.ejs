@@ -136,7 +136,7 @@
                             <%}%>
                             <% for (let i= 0; i< venta.promocion.length; i++){%>
                                 <tr>
-                                    <td><%= i+1%></td>
+                                    <td><%= i+1+venta.productos.length%></td>
                                     <td><%=venta.promocion[i].id.detalle%></td>
                                     <td><%=venta.promocion[i].cantidad%></td>
                                     <td><%=parseFloat(venta.promocion[i].total).toFixed(2)%></td>

@@ -27,7 +27,11 @@ const VentaSchema = new Schema({
             total:String
         }
     ],
-    total:String
+    total:String,
+    user:{
+        type: Schema.ObjectId,
+        ref: "user"
+    }
 })
 
 module.exports = mongoose.model('venta', VentaSchema)
