@@ -9,12 +9,12 @@
                 <a href="/venta/formVentas" class="btn btn-info mt-5"><i class="fas fa-plus"></i>  Nueva Venta</a>
                 <nav class="navbar justify-content-between">
                     <a class="navbar-brand"></a>
-                    <form class="form-inline" action="" method="POST">
-                        <input class="form-control mr-sm-2"
-                        type="search"
-                        name="search"
-                        placeholder="Buscar"
-                        aria-label="Search">
+                    <form class="form-inline" action="/ventas/searchVentas" method="POST">
+                        <input class="form-control"
+                            type="search"
+                            name="search"
+                            placeholder="MM-DD-AAAA"
+                            aria-label="Search">
                         <button class="btn btn-info my-2 my-sm-0" type="submit">
                             <i class="fas fa-search"></i>
                         </button>
@@ -34,7 +34,7 @@
                         <% for(let i=ventas.length-1; i>=0; i-- ){%>
                             <tr>
                                 <td><%=ventas[i].codigo%></td>
-                                <td><%=(ventas[i].fecha).toUTCString()%></td>
+                                <td><%=(ventas[i].fecha).toDateString()%></td>
                                 <td><%=parseFloat(ventas[i].total).toFixed(2)%></td>
                                 <td>
                                     <a href="/ventas/detalle/<%=ventas[i]._id%>"

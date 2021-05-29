@@ -130,6 +130,9 @@ border-radius: 5px;
 .form-group.gananciaGroup::before {
     content: "\f295";
 }
+.form-group.searchGroup::before {
+    content: "\f11c";
+}
 .button {
 width: 60%;
 margin: 5px 0 25px 0;

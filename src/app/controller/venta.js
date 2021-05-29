@@ -7,6 +7,8 @@ const Product = require('../models/producto')
 const Promocion = require('../models/promocion')
 const Venta = require('../models/venta')
 
+
+
 let controller ={
     venta: async(req, res)=>{
         if(req.isAuthenticated()){
@@ -250,7 +252,7 @@ let controller ={
             // Crear nueva venta
             let newVenta = new Venta()
             newVenta.codigo = ventas.length+1
-            newVenta.fecha = new Date()
+            newVenta.fecha = new Date().toDateString()
             newVenta.user = req.user
             // Guardar la venta
             newVenta.save(async (error)=>{
@@ -427,7 +429,45 @@ let controller ={
             user:req.user,
             venta
         })
-    }
+    },
+    searchVentas: async (req, res) => {
+        await Venta.find({
+            "$or":[
+                {
+                    "fecha":{
+                        "$gt": new Date(req.body.search)
+                    }
+                }
+            ]
+        }).exec(async(error, ventas) =>{
+            if(error){
+                console.log(error);
+                let ventas = await Venta.find()
+                res.render('venta',{
+                    user: req.user,
+                    ventas,
+                    message:'',
+                    messageFailed:'Error en la Base de Datos'
+                })
+            }
+            if(ventas && ventas.length <= 0){
+                let ventas = await Venta.find()
+                res.render('venta',{
+                    user: req.user,
+                    ventas,
+                    message:'',
+                    messageFailed:'No existen Ventas que coincidan con la búsqueda'
+                })
+            }else{
+                res.render('venta',{
+                    user: req.user,
+                    ventas,
+                    message:'',
+                    messageFailed:''
+                })
+            }
+        })
+    },
 }
 
 module.exports = controller
