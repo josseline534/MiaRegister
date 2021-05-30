@@ -82,3 +82,8 @@ const cantMax = () => {
         </div>`
     }
 }
+
+const descargarExcel = () => {
+    var table2excel = new Table2Excel();
+    table2excel.export(document.querySelectorAll("#tabla"),"Productos_menor_stock");
+}

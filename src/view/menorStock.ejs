@@ -1,0 +1,47 @@
+<%- include('./partials/_header.ejs'); -%>
+    <title>Estadisticas</title>
+</head>
+<body class="principal">
+    <div class="d-flex">
+        <%- include('./partials/_menu.ejs'); -%>
+        <div class="w-100">
+            <%- include('./partials/_menuEstadisticas.ejs'); -%>
+            <nav class="navbar justify-content-between">
+                <button class="btn btn-success m-3"
+                onclick="descargarExcel()">Descargar excel</button>
+                <form class="form-inline" action="/estadisticas/menorStock" method="POST">
+                    <input class="form-control mr-sm-2"
+                    type="number"
+                    name="stock"
+                    placeholder="Ingresar stock"
+                    aria-label="Search">
+                    <button class="btn btn-info my-2 my-sm-0" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </nav>
+            <div class="m-3">
+                <table id="tabla" class="table table-bordered table-striped">
+                    <thead class="tablePrimary">
+                        <tr>
+                            <th>Num.</th>
+                            <th>Detalle</th>
+                            <th>Stock</th>
+                            <th>Precio Unit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%for(let i=0; i < prodMenor.length; i++){%>
+                            <tr>
+                                <td><%=i+1%></td>
+                                <td><%=prodMenor[i].detalle%></td>
+                                <td><%=prodMenor[i].stock%></td>
+                                <td><%=prodMenor[i].precioUnit%></td>
+                            </tr>
+                        <%}%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<%- include('./partials/_footer.ejs'); -%>

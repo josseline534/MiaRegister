@@ -197,3 +197,15 @@ color: blanchedalmond;
 .modal-content.myModal{
     background-color: white;
 }
+
+.bg-estadisticas{
+    background-color: #17324a !important;
+}
+.bg-estadisticas .nav-link{
+    color: #a8ddee !important;
+    height: 8vh;
+}
+.bg-estadisticas .nav-link:hover,
+.bg-estadisticas .nav-link:active{
+    color: white !important;
+}

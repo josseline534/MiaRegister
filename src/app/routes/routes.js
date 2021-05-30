@@ -8,6 +8,7 @@ const controllerProduct = require('../controller/product')
 const controllerCompra = require('../controller/compra')
 const controllerPromociones = require('../controller/promociones')
 const controllerVenta = require('../controller/venta')
+const controllerEstadisticas = require('../controller/estadisticas')
 
 //----------------------USER--------------------------
 // GET
@@ -71,4 +72,11 @@ route.get('/ventas/detalle/:id', controllerVenta.detail)
 route.post('/ventas/search/:id?', controllerVenta.search)
 route.post('/venta/producto/:idVenta?', controllerVenta.add)
 route.post('/ventas/searchVentas', controllerVenta.searchVentas)
+
+//----------------------ESTADISTICAS--------------------------
+//GET
+route.get('/estadisticas', controllerEstadisticas.estadisticas)
+route.get('/estadisticas/menorStock', controllerEstadisticas.menorStock)
+//POST
+route.post('/estadisticas/menorStock', controllerEstadisticas.menor)
 module.exports = route
