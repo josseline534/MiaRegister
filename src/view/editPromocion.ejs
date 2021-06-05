@@ -1,0 +1,78 @@
+<%- include('./partials/_header.ejs'); -%>
+    <title>Promocion</title>
+</head>
+<body class="principal">
+    <div class="d-flex">
+        <%- include('./partials/_menu.ejs'); -%>
+        <div class="w-100">
+            <div class="text-center modal-dialog">
+                <div class="col-sm-9 mainSection promocion">
+                    <div class="modal-content">
+                        <div class="col-12 userImg">
+                            <img class="imagen" src="/img/compras.png" alt="Compras">
+                        </div>
+                        <form action="/promociones/update/<%=promo._id%>" method="POST" class="col-12">
+                            <div class="form-group codeGroup">
+                                <input class="form-control"
+                                name="codigo"
+                                type="text"
+                                value="<%=promo.codigo%>"
+                                placeholder="Código Promoción"
+                                required>
+                            </div>
+                            <div class="form-group detailGroup">
+                                <input class="form-control"
+                                name="detalle"
+                                type="text"
+                                value="<%=promo.detalle%>"
+                                placeholder="Detalle"
+                                required>
+                            </div>
+                            <div class="form-group cantidadGroup">
+                                <input class="form-control"
+                                name="stock"
+                                type="number"
+                                placeholder="Stock"
+                                value="<%=parseInt(promo.stock)%>"
+                                onkeypress='return validaCantidad(event)'
+                                required>
+                            </div>
+                            <div class="form-group totalGroup">
+                                <input class="form-control"
+                                name="precio"
+                                type="text"
+                                placeholder="Precio"
+                                value="<%=parseFloat(promo.precio).toFixed(2)%>"
+                                onkeypress='return validaPrecio(event)'
+                                required>
+                            </div>
+                            <div class="form-group">
+                                <p>
+                                <%for(let i=0; i< promo.productos.length; i++){%>
+                                    <li class="bg-white text-left nav p-1">
+                                        <p class="ml-2 mb-1 h6 mt-2">
+                                            <%=promo.productos[i].id.detalle%>
+                                        </p>
+                                    </li>
+                                <%}%>
+                                </p>
+                            </div>
+                            <div class="btn-toolbar justify-content-md-center">
+                                <div class="btn-group mr-2">
+                                    <a href="/promociones" class="button btn btn-warning form-control">
+                                        <i class="fas fa-arrow-alt-circle-left"></i>  Cancelar
+                                    </a>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="submit" class="button btn btn-info form-control">
+                                        <i class="fas fa-cart-plus"></i>  Actualizar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<%- include('./partials/_footer.ejs'); -%>

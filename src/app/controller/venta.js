@@ -468,6 +468,29 @@ let controller ={
             }
         })
     },
+    deleteSell: async (req, res) => {
+        let venta = await Venta.findById({_id: req.params.id})
+        if(parseFloat(venta.total) == 0){
+            await Venta.remove({_id: req.params.id})
+            let ventas = await Venta.find()
+            res.render('venta', {
+                user: req.user,
+                ventas,
+                messageFailed:'',
+                message:'Venta eliminada correctamente'
+            })
+        }
+        else{
+            let ventas = await Venta.find()
+            res.render('venta', {
+                user: req.user,
+                ventas,
+                messageFailed:'La venta no se puede eliminar porque existen productos',
+                message:''
+            })
+        }
+        
+    }
 }
 
 module.exports = controller

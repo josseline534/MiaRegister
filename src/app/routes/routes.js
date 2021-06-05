@@ -53,11 +53,14 @@ route.get('/promociones', controllerPromociones.promociones)
 route.get('/promociones/add', controllerPromociones.formInsert)
 route.get('/promociones/delete/:idPromocion&:detalle&:idObject', controllerPromociones.delete)
 route.get('/promociones/deleteProd/:id', controllerPromociones.deletePromocion)
+route.get('/promociones/llenarproducto/:id&:idPromo', controllerPromociones.llenar)
+route.get('/promociones/editar/:id', controllerPromociones.edit)
 //POST
 route.post('/promociones/add', controllerPromociones.insert)
 route.post('/promociones/search/:id', controllerPromociones.search)
-route.post('/promociones/searchPromocion', controllerPromociones.searchPromocion)
+route.post('/promociones/searchPromocion/', controllerPromociones.searchPromocion)
 route.post('/promociones/addProducto/:id', controllerPromociones.insertProd)
+route.post('/promociones/update/:id', controllerPromociones.update)
 
 //----------------------VENTA--------------------------
 //GET
@@ -67,7 +70,7 @@ route.get('/venta/llenarPromocion/:idpromocion&:idventa?', controllerVenta.llena
 route.get('/venta/llenarProducto/:idproducto&:idventa?', controllerVenta.llenarProd)
 route.get('/ventas/delete/producto/:idVenta&:idObject', controllerVenta.delete)
 route.get('/ventas/detalle/:id', controllerVenta.detail)
-//
+route.get('/ventas/delete/:id', controllerVenta.deleteSell)
 //POST
 route.post('/ventas/search/:id?', controllerVenta.search)
 route.post('/venta/producto/:idVenta?', controllerVenta.add)

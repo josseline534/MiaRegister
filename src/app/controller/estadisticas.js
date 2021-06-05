@@ -19,7 +19,7 @@ let controller = {
                 "$or":[
                     {
                         "stock":{
-                            "$lt": 25
+                            "$lt": 3
                         }
                     }
                 ]

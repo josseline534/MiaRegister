@@ -37,10 +37,10 @@
                                     <% for(let i=0; i< productos.length;i++){%>
                                         <tr>
                                             <td><%= i+1 %></td>
-                                            <td id="prodDetalle"><%= productos[i].detalle %></td>
-                                            <td id="prodStock"><%= productos[i].stock %></td>
+                                            <td><%= productos[i].detalle %></td>
+                                            <td><%= productos[i].stock %></td>
                                             <td>
-                                                <a href="#" class="btn btn-success" onclick="llenarDatos()">
+                                                <a href="/promociones/llenarproducto/<%=productos[i]._id%>&<%=promocion._id%>" class="btn btn-success">
                                                     <i class="far fa-check-square" ></i>
                                                 </a>
                                             </td>
@@ -62,6 +62,7 @@
                                         id="detalle"
                                         type="text"
                                         placeholder="Detalle"
+                                        value="<%=prod.detalle%>"
                                         readonly
                                         required>
                                 </div>
@@ -72,7 +73,7 @@
                                     type="number"
                                     placeholder="Cantidad"
                                     onkeypress='return validaCantidad(event)'
-                                    onblur="return cantMax()"
+                                    onblur="return cantMax(prod.stock)"
                                     required>
                                 </div>
                                 <div id="errorCant"></div>
@@ -105,46 +106,15 @@
                         <% for (let i=promocion.productos.length-1; i>=0; i--){%>
                             <tr>
                                 <td><%= promocion.productos.length-i%></td>
-                                <td id="productoDetalle"><%= promocion.productos[i].id.detalle%></td>
-                                <td id="productoCantidad"><%= promocion.productos[i].cantidad%></td>
+                                <td><%= promocion.productos[i].id.detalle%></td>
+                                <td><%= promocion.productos[i].cantidad%></td>
                                 <td>
                                     <a
+                                    href="/promociones/delete/<%=promocion._id%>&<%=promocion.productos[i].id.detalle%>&<%=promocion.productos[i]._id%>"
                                     class="btn btn-danger"
-                                    data-toggle="modal"
-                                    data-target="#deleteModal"
                                     >
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
-                                    <!-- Modal Delete-->
-                                    <div class="modal fade" id="deleteModal"
-                                    tabindex="-1" role="dialog"
-                                    aria-labelledby="deleteModalLabel"
-                                    aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                        <div class="modal-content myModal">
-                                            <div class="modal-header">
-                                            <h4 class="modal-title text-danger" id="deleteModalLabel">
-                                                <i class="fas fa-trash-alt"></i> Eliminar Producto
-                                            </h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            </div>
-                                            <div class="modal-body font-weight-bold text-center">
-                                            <p>¿Está seguro de eliminar el producto <%=promocion.productos[i].id.detalle%>?</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <a
-                                            href="/promociones/delete/<%=promocion._id%>&<%=promocion.productos[i].id.detalle%>&<%=promocion.productos[i]._id%>"
-                                            type="button"
-                                            class="btn btn-danger">
-                                                Eliminar
-                                            </a>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
                                 </td>
                             </tr>
                         <%}%>

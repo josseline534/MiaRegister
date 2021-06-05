@@ -45,6 +45,7 @@ let controller ={
                         user: req.user,
                         promocion,
                         productos:[],
+                        prod:{},
                         message:'Promoción guardada correctamente',
                         messageFailed:''
                     })
@@ -75,6 +76,7 @@ let controller ={
                     user: req.user,
                     productos:{},
                     promocion,
+                    prod:{},
                     messageFailed:'Error al conectarse con la Base de Datos',
                     message:''
                 })
@@ -84,6 +86,7 @@ let controller ={
                     user: req.user,
                     productos:{},
                     promocion,
+                    prod:{},
                     messageFailed:'No existen productos que coincidan con la búsqueda',
                     message:''
                 })
@@ -91,6 +94,7 @@ let controller ={
                 res.render('addProdPromo',{
                     user: req.user,
                     promocion,
+                    prod:{},
                     productos,
                     messageFailed:'',
                     message:''
@@ -110,6 +114,7 @@ let controller ={
                 user: req.user,
                 productos:{},
                 promocion,
+                prod:{},
                 messageFailed:`El producto ${req.body.detalle} ya esta ingresado`,
                 message:''
             })
@@ -122,6 +127,7 @@ let controller ={
                             user: req.user,
                             productos:{},
                             promocion,
+                            prod:{},
                             messageFailed:'Error al conectarse con la Base de Datos',
                             message:''
                         })
@@ -131,6 +137,7 @@ let controller ={
                             user: req.user,
                             productos:{},
                             promocion,
+                            prod:{},
                             messageFailed:'No se encontro el producto',
                             message:''
                         })
@@ -146,6 +153,7 @@ let controller ={
                                         user: req.user,
                                         productos:{},
                                         promocion,
+                                        prod:{},
                                         messageFailed:'Error al conectarse con la Base de Datos',
                                         message:''
                                     })
@@ -161,6 +169,7 @@ let controller ={
                                                 user: req.user,
                                                 productos:{},
                                                 promocion,
+                                                prod:{},
                                                 messageFailed:'Error al conectarse con la Base de Datos',
                                                 message:''
                                             })
@@ -176,6 +185,7 @@ let controller ={
                                                 user: req.user,
                                                 productos:{},
                                                 promocion,
+                                                prod:{},
                                                 messageFailed:'',
                                                 message:'Producto añadido correctamente'
                                             })
@@ -188,6 +198,7 @@ let controller ={
                                 user: req.user,
                                 productos:{},
                                 promocion,
+                                prod:{},
                                 messageFailed:'',
                                 message:'El stock no es suficiente para crear la promoción'
                             })
@@ -210,6 +221,7 @@ let controller ={
                     user: req.user,
                     productos:{},
                     promocion,
+                    prod:{},
                     messageFailed:'Error al conectarse con la Base de Datos',
                     message:''
                 })
@@ -228,6 +240,7 @@ let controller ={
                             user: req.user,
                             productos:{},
                             promocion,
+                            prod:{},
                             messageFailed:'Error al eliminar el producto de la promoción',
                             message:''
                         })
@@ -236,6 +249,7 @@ let controller ={
                             user: req.user,
                             productos:{},
                             promocion,
+                            prod:{},
                             messageFailed:'',
                             message:'Producto eliminado de la promoción'
                         })
@@ -325,6 +339,46 @@ let controller ={
                     user: req.user,
                     promociones,
                     message:'',
+                    messageFailed:''
+                })
+            }
+        })
+    },
+    llenar: async(req, res)=>{
+        let prod = await Product.findById({_id:req.params.id})
+        let promocion = await Promocion.findById({_id: req.params.idPromo})
+        res.render('addProdPromo',{
+            user: req.user,
+            productos:{},
+            promocion,
+            prod,
+            messageFailed:'',
+            message:'Producto añadido correctamente'
+        })
+    },
+    edit: async(req, res)=> {
+        let promo = await Promocion.findById({_id:req.params.id}).populate('productos.id')
+        res.render('editPromocion',{
+            user: req.user,
+            promo
+        })
+    },
+    update: async (req, res) => {
+        await Promocion.updateOne({_id: req.params.id},{
+            codigo: req.body.codigo,
+            detalle: req.body.detalle,
+            stock: req.body.stock,
+            precio: req.body.precio
+        },async (error)=>{
+            if(error){
+                console.log(error);
+            }
+            else{
+                let promociones = await Promocion.find().populate('productos.id')
+                res.render('promociones',{
+                    user: req.user,
+                    promociones,
+                    message:`Promoción ${req.body.codigo} actualizada correctamente`,
                     messageFailed:''
                 })
             }

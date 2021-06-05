@@ -40,7 +40,7 @@
                                 <td><%=promociones[i].codigo%></td>
                                 <td><%=promociones[i].detalle%></td>
                                 <td><%=promociones[i].stock%></td>
-                                <td><%=promociones[i].precio%></td>
+                                <td><%=parseFloat(promociones[i].precio).toFixed(2)%></td>
                                 <% for(let j=0; j < promociones[i].productos.length; j++){%>
                                     <td class="d-flex justify-content-between ">
                                         <%=promociones[i].productos[j].id.detalle%>
@@ -55,6 +55,13 @@
                                     class="btn btn-danger"
                                     >
                                         <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                    <a href="/promociones/editar/<%= promociones[i]._id %>"
+                                        class="btn btn-info"
+                                        data-toggle="tooltip"
+                                        data-placement="bottom"
+                                        title="Editar">
+                                            <i class="fas fa-pen"></i>
                                     </a>
                                     <a href="/venta/llenarPromocion/<%=promociones[i]._id%>&"
                                         class="btn btn-success"
