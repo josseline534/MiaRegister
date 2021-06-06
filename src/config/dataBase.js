@@ -1,5 +1,5 @@
 const db = {
-    'url': "mongodb://localhost:27017/miaRegister",
+    'url': "mongodb+srv://admin:admin1234@cluster0.cpoin.mongodb.net/MiaRegister?retryWrites=true&w=majority",
     'options':{
         useNewUrlParser: true,
         useUnifiedTopology: true
